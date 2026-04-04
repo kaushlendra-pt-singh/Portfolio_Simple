@@ -11,7 +11,7 @@ function MainSection() {
     const words = ['Full Stack Web Developer.', 'AI/ML Engineer.', 'Tech Enthusiast.']
     return (
         <main className='flex pt-[4%] w-full flex-col h-full justify-between relative'>
-            <BackgroundRippleEffect rows={12} cols={27} cellSize={45} borderColor='rgba(59, 130, 246, 0.3)' fillColor='rgba(14, 165, 233, 0.4)' />
+            <BackgroundRippleEffect rows={11} cols={25} cellSize={48} borderColor='rgba(59, 130, 246, 0.3)' fillColor='rgba(14, 165, 233, 0.4)' />
             <div className='flex flex-5 w-full h-[70%] items-center'>
                 <div className='inline-block pl-10 pt-8 flex-1 h-full justify-evenly leading-2 relative'>
                     <p className='text-4xl mb-2.5 pl-1 mt-1'>Hi there, It's</p>
