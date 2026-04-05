@@ -39,7 +39,7 @@ export const StickyScroll = ({
   return (
     // 2. Removed the animated backgroundColor and set it to bg-transparent
     <div
-      className="relative flex h-screen w-full justify-between overflow-y-auto rounded-md p-10 md:p-20 bg-transparent [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      className="relative h-full flex w-full justify-between overflow-y-auto rounded-md p-10 md:p-20 bg-transparent [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       ref={ref}>
       
       {/* LEFT SIDE: Text & Mobile Images */}
