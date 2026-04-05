@@ -1,5 +1,5 @@
 import React from 'react'
-import portfolioImage from '../assets/PortfolioImage.png';
+import portfolioImage from '../assets/My_Pic.jpeg';
 import { GlowingEffect } from '../components/ui/glowing-effect.jsx';
 import { WobbleCard } from '../components/ui/wobble-card.jsx';
 import { TypewriterEffect } from '../components/ui/typewriter-effect.jsx';
@@ -13,10 +13,10 @@ function MainSection() {
         <main className='flex pt-[4%] w-full flex-col h-full justify-between relative'>
             <BackgroundRippleEffect rows={11} cols={25} cellSize={48} borderColor='rgba(59, 130, 246, 0.3)' fillColor='rgba(14, 165, 233, 0.4)' />
             <div className='flex flex-5 w-full h-[70%] items-center'>
-                <div className='inline-block pl-10 pt-8 flex-1 h-full justify-evenly leading-2 relative'>
-                    <p className='text-4xl mb-2.5 pl-1 mt-1'>Hi there, It's</p>
-                    <p className='text-8xl mr-2 font-heading'>KAUSHLENDRA</p>
-                    <p className='text-7xl mt-2.5 font-heading'>PRATAP SINGH</p>
+                <div className='ml-4 inline-block pl-10 flex-1 h-full justify-evenly leading-2 relative'>
+                    <p className='text-3xl mb-2.5 pl-1 mt-1'>Hi there, It's</p>
+                    <p className='text-7xl mr-2 font-heading'>KAUSHLENDRA</p>
+                    <p className='text-6xl mt-2.5 font-heading'>PRATAP SINGH</p>
                     <p className='mt-5.5 inline-block text-2xl ml-1'>I am a </p>
                     <FlipWords words={words} className={'text-sky-500! text-3xl'} />
                 </div>
@@ -28,8 +28,8 @@ function MainSection() {
                         {/* <GlowingEffect disabled={false} spread={50} glow={true} borderWidth={1.5} proximity={20} /> */}
 
                         {/* 3. The Image sits next to it, with relative and z-10 to stay on top of the glow */}
-                        <div>
-                            <BackgroundGradient className={'h-80'} containerClassName={'mb-5 mt-[-25px]'} >
+                        <div className='-mr-8'>
+                            <BackgroundGradient className={'h-65'} containerClassName={'mt-[-25px]'} >
                                 <img
                                     className='relative z-10 h-full w-auto object-cover rounded-[20px] border border-border/50'
                                     src={portfolioImage}
@@ -42,7 +42,7 @@ function MainSection() {
             </div>
 
             <div className='w-full flex-2 items-center flex justify-evenly mb-2'>
-                <div className="w-full flex justify-center">
+                <div className="w-full flex justify-center -mt-12">
                     {/* Added the custom inset shadow right here in the containerClassName */}
                     <WobbleCard
                         containerClassName="max-w-4xl w-full bg-background border-sky-500 border-[1.5px] rounded-2xl min-h-0 h-[150px] shadow-[inset_0_0_40px_rgba(14,165,233,0.5)]"
