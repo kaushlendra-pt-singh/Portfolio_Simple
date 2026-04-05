@@ -61,7 +61,7 @@ export default function AboutSection() {
                     ABOUT ME
                 </Motion.h1>
 
-                <Motion.button
+                <Motion.a
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
@@ -69,7 +69,7 @@ export default function AboutSection() {
                     className="mt-8 rounded-full bg-sky-500 px-8 py-3 font-body font-medium text-white shadow-[0_0_20px_rgba(56,189,248,0.6)] transition-all hover:bg-sky-400 hover:cursor-pointer hover:scale-105 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)]"
                 >
                     Download Resume
-                </Motion.button>
+                </Motion.a>
             </section>
 
             {/* --- BOTTOM: The Parallax Container (Starts completely off-screen) --- */}

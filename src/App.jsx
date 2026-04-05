@@ -2,6 +2,7 @@ import { FloatingNav } from './components/ui/floating-navbar.jsx';
 import Header from './reusable/Header.jsx';
 import MainSection from './Sections/MainSection.jsx';
 import AboutSection from './Sections/AboutSection.jsx';
+import ProjectsSection from './Sections/ProjectsSection.jsx';
 import './App.css'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         </div>
       </div>
       <AboutSection />
+      <ProjectsSection />
     </>
   )
 }
