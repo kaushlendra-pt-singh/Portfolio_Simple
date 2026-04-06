@@ -1,100 +1,208 @@
 "use client";
-import React, { useRef } from "react";
-import { useMotionValueEvent, useScroll, motion as Motion } from "motion/react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
+import { motion as Motion, useMotionValue, animate } from "motion/react";
 import { cn } from "@/lib/utils";
 
-export const StickyScroll = ({
-  content,
-  contentClassName
-}) => {
-  const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    container: ref,
-    // target:ref,
-    offset: ["start start", "end start"],
-  });
+export const StickyScroll = ({ content, contentClassName }) => {
+  const [activeCard, setActiveCard] = useState(0);
   const cardLength = content.length;
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const cardsBreakpoints = content.map((_, index) => index / cardLength);
-    const closestBreakpointIndex = cardsBreakpoints.reduce((acc, breakpoint, index) => {
-      const distance = Math.abs(latest - breakpoint);
-      if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
-        return index;
-      }
-      return acc;
-    }, 0);
-    setActiveCard(closestBreakpointIndex);
-  });
+  const progressMV = useMotionValue(0);
+  const isAnimating = useRef(false);
+  const wheelAccum = useRef(0);
+  const wheelTimer = useRef(null);
+  const lastExitTime = useRef(0);
+  const isExiting = useRef(false); // hard-blocks ALL wheel events during outer nav
 
-  // 1. Replaced background colors with your requested Shadow Glow colors!
+  const EXIT_COOLDOWN = 2200;
+  const WHEEL_THRESHOLD = 200;
+
+  useEffect(() => {
+    const unsub = progressMV.on("change", (v) => {
+      const idx = Math.round(v);
+      setActiveCard(Math.max(0, Math.min(idx, cardLength - 1)));
+    });
+    return unsub;
+  }, [progressMV, cardLength]);
+
+  const goToCard = useCallback((idx) => {
+    idx = Math.max(0, Math.min(idx, cardLength - 1));
+    isAnimating.current = true;
+    animate(progressMV, idx, {
+      type: "spring",
+      stiffness: 280,
+      damping: 34,
+      onComplete: () => { isAnimating.current = false; },
+    });
+  }, [progressMV, cardLength]);
+
+  const exitToSection = useCallback((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    lastExitTime.current = Date.now();
+    isExiting.current = true;
+    wheelAccum.current = 0;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Hold exit lock until the outer snap scroll fully settles
+    setTimeout(() => { isExiting.current = false; }, 2400);
+  }, []);
+
+  const handleWheel = useCallback((e) => {
+    // Always prevent & stop — this is the primary fix for outer-section wobble.
+    // The outer snap container must never receive wheel events while we own them.
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isExiting.current) return;
+    if (isAnimating.current) return;
+
+    wheelAccum.current += e.deltaY;
+    clearTimeout(wheelTimer.current);
+    wheelTimer.current = setTimeout(() => { wheelAccum.current = 0; }, 150);
+
+    if (Math.abs(wheelAccum.current) < WHEEL_THRESHOLD) return;
+
+    const direction = wheelAccum.current > 0 ? 1 : -1;
+    wheelAccum.current = 0;
+
+    const currentCard = Math.round(progressMV.get());
+    const nextCard = currentCard + direction;
+    const canExit = Date.now() - lastExitTime.current > EXIT_COOLDOWN;
+
+    if (nextCard >= cardLength && canExit) {
+      exitToSection("projects");
+    } else if (nextCard < 0 && canExit) {
+      exitToSection("home");
+    } else if (nextCard >= 0 && nextCard < cardLength) {
+      goToCard(nextCard);
+    }
+  }, [progressMV, cardLength, goToCard, exitToSection]);
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    // capture:true intercepts before the event can reach the outer snap container
+    el.addEventListener("wheel", handleWheel, { passive: false, capture: true });
+    return () => el.removeEventListener("wheel", handleWheel, { capture: true });
+  }, [handleWheel]);
+
+  // Touch support
+  const touchStartY = useRef(0);
+  const handleTouchStart = (e) => { touchStartY.current = e.touches[0].clientY; };
+  const handleTouchEnd = (e) => {
+    if (isExiting.current) return;
+    const delta = touchStartY.current - e.changedTouches[0].clientY;
+    if (Math.abs(delta) < 50) return;
+    const direction = delta > 0 ? 1 : -1;
+    const currentCard = Math.round(progressMV.get());
+    const nextCard = currentCard + direction;
+    const canExit = Date.now() - lastExitTime.current > EXIT_COOLDOWN;
+    if (nextCard >= cardLength && canExit) exitToSection("projects");
+    else if (nextCard < 0 && canExit) exitToSection("home");
+    else if (nextCard >= 0 && nextCard < cardLength) goToCard(nextCard);
+  };
+
   const shadowColors = [
-    "rgba(250, 204, 21, 0.7)",  //1. Sun Yellow
-    "rgba(56, 189, 248, 0.7)",  // 2. Sky Blue (sky-400)
-    "rgba(102, 0, 204, 0.7)",  //3. Violet
-    "rgba(74, 222, 128, 0.7)",  // 4. Nature Green (green-400)
+    "rgba(250, 204, 21, 0.7)",
+    "rgba(56, 189, 248, 0.7)",
+    "rgba(127, 0, 255, 0.7)",
+    "rgba(74, 222, 128, 0.7)",
   ];
 
   return (
-    // 2. Removed the animated backgroundColor and set it to bg-transparent
     <div
-      className="relative h-full flex w-full justify-between overflow-y-auto rounded-md p-10 md:p-20 bg-transparent [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-      ref={ref}>
-
-      {/* LEFT SIDE: Text & Mobile Images */}
-      <div className="relative flex items-start w-full lg:w-1/2 pr-8 md:pr-16">
-        <div className="max-w-2xl w-full">
-          {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
-              <Motion.h2
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
-                // 3. Changed text-slate-100 to text-foreground for Light/Dark mode support
-                className="text-3xl font-bold text-foreground font-heading">
-                {item.title}
-              </Motion.h2>
-
-              {/* Mobile Image (Also gets the shifting glow!) */}
+      ref={containerRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="relative h-full flex w-full justify-between rounded-md px-10 md:px-20 bg-transparent overflow-hidden"
+    >
+      {/* LEFT: Text cards */}
+      <div className="relative flex items-start w-full lg:w-1/2 pr-8 md:pr-16 overflow-hidden">
+        <div className="w-full h-full relative">
+          {content.map((item, index) => {
+            const diff = index - activeCard;
+            return (
               <Motion.div
-                initial={{ opacity: 0 }}
+                key={item.title + index}
                 animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                  filter: `drop-shadow(0px 0px 40px ${shadowColors[activeCard % shadowColors.length]})`
+                  opacity: activeCard === index ? 1 : Math.max(0, 1 - Math.abs(diff) * 0.6),
+                  y: diff * 80,
+                  filter: activeCard === index ? "blur(0px)" : `blur(${Math.abs(diff) * 5}px)`,
+                  scale: activeCard === index ? 1 : 0.94,
                 }}
-                transition={{ duration: 0.5 }}
-                className="lg:hidden mt-8 mb-8 w-full flex justify-center"
+                transition={{ type: "spring", stiffness: 280, damping: 34 }}
+                className="absolute inset-0 flex flex-col justify-center py-32 max-w-2xl w-full"
+                style={{ pointerEvents: activeCard === index ? "auto" : "none" }}
               >
-                {item.content}
-              </Motion.div>
+                <h2 className="text-3xl font-bold text-foreground font-heading">
+                  {item.title}
+                </h2>
 
-              <Motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
-                // 4. Changed text-slate-300 to text-foreground/80
-                className="text-lg mt-6 lg:mt-10 max-w-md text-foreground/80 font-body leading-relaxed">
-                {item.description}
-              </Motion.p>
-            </div>
-          ))}
-          <div className="h-40" />
+                {/* Mobile image */}
+                <Motion.div
+                  animate={{
+                    filter: `drop-shadow(0px 0px 40px ${shadowColors[activeCard % shadowColors.length]})`,
+                  }}
+                  className="lg:hidden mt-8 mb-8 w-full flex justify-center"
+                >
+                  {item.content}
+                </Motion.div>
+
+                {/* Description — accepts ReactNode */}
+                <div className="text-base mt-6 lg:mt-10 max-w-md text-foreground/80 font-body leading-relaxed">
+                  {item.description}
+                </div>
+
+                {/* Dot indicators */}
+                <div className="flex gap-2 mt-8">
+                  {content.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => goToCard(i)}
+                      className={cn(
+                        "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
+                        i === activeCard
+                          ? "w-6 bg-foreground"
+                          : "w-1.5 bg-foreground/30 hover:bg-foreground/60"
+                      )}
+                      aria-label={`Go to ${content[i].title}`}
+                    />
+                  ))}
+                </div>
+              </Motion.div>
+            );
+          })}
         </div>
       </div>
 
-      {/* --- RIGHT SIDE: The Image Container --- */}
-      {/* 5. Animated the drop-shadow filter to create a massive glow around the image */}
+      {/* RIGHT: Image panel */}
       <Motion.div
         animate={{
-          filter: `drop-shadow(0px 0px 60px ${shadowColors[activeCard % shadowColors.length]})`
+          filter: `drop-shadow(0px 0px 60px ${shadowColors[activeCard % shadowColors.length]})`,
         }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        transition={{ duration: 0.6 }}
         className={cn(
           "sticky top-0 hidden lg:flex lg:w-1/2 h-full items-center justify-center",
           contentClassName
-        )}>
-        {content[activeCard].content ?? null}
+        )}
+      >
+        {content.map((item, index) => (
+          <Motion.div
+            key={index}
+            animate={{
+              opacity: activeCard === index ? 1 : 0,
+              scale: activeCard === index ? 1 : 0.9,
+              filter: activeCard === index ? "blur(0px)" : "blur(8px)",
+            }}
+            transition={{ type: "spring", stiffness: 240, damping: 30 }}
+            className="absolute"
+          >
+            {item.content}
+          </Motion.div>
+        ))}
       </Motion.div>
-
     </div>
   );
 };
