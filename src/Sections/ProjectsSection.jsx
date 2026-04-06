@@ -36,7 +36,7 @@ function ProjectsSection() {
                 initial={{ opacity: 0.5, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.8, ease: "easeInOut" }}
-                className="shrink-0 bg-linear-to-br from-slate-800 to-slate-500 dark:from-slate-300 dark:to-slate-500 py-2 bg-clip-text text-center text-3xl md:text-5xl font-heading font-bold tracking-tight text-transparent drop-shadow-[0_0_40px_rgba(56,189,248,0.5)]"
+                className="shrink-0 bg-linear-to-br from-slate-800 to-slate-500 dark:from-slate-300 dark:to-slate-500 py-2 bg-clip-text text-center text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-transparent drop-shadow-[0_0_40px_rgba(56,189,248,0.5)]"
             >
                 MY PROJECTS
             </Motion.h1>

@@ -55,7 +55,7 @@ export default function AboutSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.8, ease: "easeInOut" }}
                     // 1. Stacked drop-shadows: One tight & bright (20px), one wide & diffuse (60px)
-                    className="shrink-0 bg-linear-to-br from-slate-800 to-slate-500 dark:from-slate-300 dark:to-slate-500 py-2 bg-clip-text text-center text-3xl font-bold font-heading tracking-tight text-transparent md:text-5xl drop-shadow-[0_0_60px_rgba(56,189,248,0.5)]"
+                    className="shrink-0 bg-linear-to-br from-slate-800 to-slate-500 dark:from-slate-300 dark:to-slate-500 pb-2 bg-clip-text text-center text-3xl font-bold font-heading tracking-tight text-transparent md:text-4xl lg:text-5xl drop-shadow-[0_0_60px_rgba(56,189,248,0.5)]"
                 >
                     ABOUT ME
                 </Motion.h1>
