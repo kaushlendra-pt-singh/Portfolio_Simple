@@ -11,10 +11,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
   const isAnimating = useRef(false);
   const wheelAccum = useRef(0);
   const wheelTimer = useRef(null);
-  const lastExitTime = useRef(0);
-  const isExiting = useRef(false); // hard-blocks ALL wheel events during outer nav
 
-  const EXIT_COOLDOWN = 2200;
   const WHEEL_THRESHOLD = 200;
 
   useEffect(() => {
@@ -36,24 +33,25 @@ export const StickyScroll = ({ content, contentClassName }) => {
     });
   }, [progressMV, cardLength]);
 
-  const exitToSection = useCallback((id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    lastExitTime.current = Date.now();
-    isExiting.current = true;
-    wheelAccum.current = 0;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-    // Hold exit lock until the outer snap scroll fully settles
-    setTimeout(() => { isExiting.current = false; }, 2400);
-  }, []);
-
   const handleWheel = useCallback((e) => {
-    // Always prevent & stop — this is the primary fix for outer-section wobble.
-    // The outer snap container must never receive wheel events while we own them.
+    const currentCard = Math.round(progressMV.get());
+
+    // 1. THE NATIVE ESCAPE HATCH: 
+    // Are we at the top trying to scroll up? Or at the bottom trying to scroll down?
+    const pushingUpAtTop = currentCard === 0 && e.deltaY < 0;
+    const pushingDownAtBottom = currentCard === cardLength - 1 && e.deltaY > 0;
+
+    if (!isAnimating.current && (pushingUpAtTop || pushingDownAtBottom)) {
+      // DO NOTHING! We deliberately DO NOT call e.preventDefault().
+      // This lets the mouse wheel event "escape" up to your <main> tag.
+      // Your CSS snap-mandatory will natively catch it and glide perfectly without shivering!
+      return; 
+    }
+
+    // 2. Otherwise, we are navigating inside the cards. Trap the scroll!
     e.preventDefault();
     e.stopPropagation();
 
-    if (isExiting.current) return;
     if (isAnimating.current) return;
 
     wheelAccum.current += e.deltaY;
@@ -65,43 +63,40 @@ export const StickyScroll = ({ content, contentClassName }) => {
     const direction = wheelAccum.current > 0 ? 1 : -1;
     wheelAccum.current = 0;
 
-    const currentCard = Math.round(progressMV.get());
     const nextCard = currentCard + direction;
-    const canExit = Date.now() - lastExitTime.current > EXIT_COOLDOWN;
-
-    if (nextCard >= cardLength && canExit) {
-      exitToSection("projects");
-    } else if (nextCard < 0 && canExit) {
-      exitToSection("home");
-    } else if (nextCard >= 0 && nextCard < cardLength) {
+    if (nextCard >= 0 && nextCard < cardLength) {
       goToCard(nextCard);
     }
-  }, [progressMV, cardLength, goToCard, exitToSection]);
+  }, [progressMV, cardLength, goToCard]);
 
   const containerRef = useRef(null);
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    // capture:true intercepts before the event can reach the outer snap container
-    el.addEventListener("wheel", handleWheel, { passive: false, capture: true });
-    return () => el.removeEventListener("wheel", handleWheel, { capture: true });
+    // We bind the wheel event cleanly here
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
   }, [handleWheel]);
 
-  // Touch support
+  // Touch support (simplified to match the native escape hatch)
   const touchStartY = useRef(0);
   const handleTouchStart = (e) => { touchStartY.current = e.touches[0].clientY; };
   const handleTouchEnd = (e) => {
-    if (isExiting.current) return;
     const delta = touchStartY.current - e.changedTouches[0].clientY;
     if (Math.abs(delta) < 50) return;
+    
     const direction = delta > 0 ? 1 : -1;
     const currentCard = Math.round(progressMV.get());
+    
+    const pushingUpAtTop = currentCard === 0 && direction < 0;
+    const pushingDownAtBottom = currentCard === cardLength - 1 && direction > 0;
+    
+    // Let native touch scrolling handle exits
+    if (pushingUpAtTop || pushingDownAtBottom) return;
+
     const nextCard = currentCard + direction;
-    const canExit = Date.now() - lastExitTime.current > EXIT_COOLDOWN;
-    if (nextCard >= cardLength && canExit) exitToSection("projects");
-    else if (nextCard < 0 && canExit) exitToSection("home");
-    else if (nextCard >= 0 && nextCard < cardLength) goToCard(nextCard);
+    if (nextCard >= 0 && nextCard < cardLength) goToCard(nextCard);
   };
 
   const shadowColors = [
@@ -140,22 +135,17 @@ export const StickyScroll = ({ content, contentClassName }) => {
                   {item.title}
                 </h2>
 
-                {/* Mobile image */}
                 <Motion.div
-                  animate={{
-                    filter: `drop-shadow(0px 0px 40px ${shadowColors[activeCard % shadowColors.length]})`,
-                  }}
+                  animate={{ filter: `drop-shadow(0px 0px 40px ${shadowColors[activeCard % shadowColors.length]})` }}
                   className="lg:hidden mt-8 mb-8 w-full flex justify-center"
                 >
                   {item.content}
                 </Motion.div>
 
-                {/* Description — accepts ReactNode */}
                 <div className="text-base mt-6 lg:mt-10 max-w-md text-foreground/80 font-body leading-relaxed">
                   {item.description}
                 </div>
 
-                {/* Dot indicators */}
                 <div className="flex gap-2 mt-8">
                   {content.map((_, i) => (
                     <button
@@ -163,9 +153,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
                       onClick={() => goToCard(i)}
                       className={cn(
                         "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
-                        i === activeCard
-                          ? "w-6 bg-foreground"
-                          : "w-1.5 bg-foreground/30 hover:bg-foreground/60"
+                        i === activeCard ? "w-6 bg-foreground" : "w-1.5 bg-foreground/30 hover:bg-foreground/60"
                       )}
                       aria-label={`Go to ${content[i].title}`}
                     />
@@ -179,14 +167,9 @@ export const StickyScroll = ({ content, contentClassName }) => {
 
       {/* RIGHT: Image panel */}
       <Motion.div
-        animate={{
-          filter: `drop-shadow(0px 0px 60px ${shadowColors[activeCard % shadowColors.length]})`,
-        }}
+        animate={{ filter: `drop-shadow(0px 0px 60px ${shadowColors[activeCard % shadowColors.length]})` }}
         transition={{ duration: 0.6 }}
-        className={cn(
-          "sticky top-0 hidden lg:flex lg:w-1/2 h-full items-center justify-center",
-          contentClassName
-        )}
+        className={cn("sticky top-0 hidden lg:flex lg:w-1/2 h-full items-center justify-center", contentClassName)}
       >
         {content.map((item, index) => (
           <Motion.div
