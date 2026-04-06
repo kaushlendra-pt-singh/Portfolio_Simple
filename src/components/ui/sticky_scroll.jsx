@@ -45,7 +45,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
       // DO NOTHING! We deliberately DO NOT call e.preventDefault().
       // This lets the mouse wheel event "escape" up to your <main> tag.
       // Your CSS snap-mandatory will natively catch it and glide perfectly without shivering!
-      return; 
+      return;
     }
 
     // 2. Otherwise, we are navigating inside the cards. Trap the scroll!
@@ -85,13 +85,13 @@ export const StickyScroll = ({ content, contentClassName }) => {
   const handleTouchEnd = (e) => {
     const delta = touchStartY.current - e.changedTouches[0].clientY;
     if (Math.abs(delta) < 50) return;
-    
+
     const direction = delta > 0 ? 1 : -1;
     const currentCard = Math.round(progressMV.get());
-    
+
     const pushingUpAtTop = currentCard === 0 && direction < 0;
     const pushingDownAtBottom = currentCard === cardLength - 1 && direction > 0;
-    
+
     // Let native touch scrolling handle exits
     if (pushingUpAtTop || pushingDownAtBottom) return;
 

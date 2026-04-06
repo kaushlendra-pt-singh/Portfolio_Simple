@@ -48,7 +48,7 @@ export const FloatingNav = ({
                 }}
                 transition={{
                     duration: 0.3,
-                    ease:'easeInOut'
+                    ease: 'easeInOut'
                 }}
                 className={cn(
                     "flex max-w-fit fixed top-6 inset-x-0 mx-auto z-5000 items-center justify-center",
