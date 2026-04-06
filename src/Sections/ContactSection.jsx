@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { motion as Motion } from 'framer-motion';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 import { FloatingDock } from '../components/ui/floating-dock';
-import { IconBrandX, IconBrandLinkedin, IconBrandGithub } from "@tabler/icons-react";
+import { IconBrandX, IconBrandLinkedin, IconBrandGithub, IconBrandInstagram } from "@tabler/icons-react";
 
 export default function ContactSection() {
     const formRef = useRef();
@@ -15,6 +15,14 @@ export default function ContactSection() {
                 <IconBrandX className="h-full w-full text-neutral-600 transition-colors duration-300 hover:text-black dark:text-neutral-300 dark:hover:text-white" />
             ),
             href: 'https://x.com/KAUSHLENDRA9569'
+        },
+        {
+            title: 'Instagram',
+            icon: (
+                /* Using a pinkish-purple hover to match the Instagram brand */
+                <IconBrandInstagram className="h-full w-full text-neutral-600 transition-all duration-300 hover:text-[#833AB4] dark:text-neutral-300 dark:hover:text-[#C13584]" />
+            ),
+            href: 'https://www.instagram.com/kaushlendrapratapsingh__/' // Add your handle here
         },
         {
             title: 'LinkedIn',
