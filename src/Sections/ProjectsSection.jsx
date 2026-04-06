@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion as Motion } from 'framer-motion';
 import ProjectCards from '../reusable/ProjectCards.jsx';
-import NLP from '../assets/NLP_PINTREST.jpg';
+import NLP from '../assets/NLP_Robo.jpg';
 import Agent from '../assets/AI_Agents.jpg';
 import Civic from '../assets/Moile_On_Hand.jpg';
 

@@ -30,9 +30,9 @@ export const StickyScroll = ({
 
   // 1. Replaced background colors with your requested Shadow Glow colors!
   const shadowColors = [
-    "rgba(250, 204, 21, 0.7)", // 1. Silver (slate-400)
+    "rgba(250, 204, 21, 0.7)",  //1. Sun Yellow
     "rgba(56, 189, 248, 0.7)",  // 2. Sky Blue (sky-400)
-    "rgba(251, 146, 60, 0.7)",  // 3. Orange (orange-400)
+    "rgba(102, 0, 204, 0.7)",  //3. Violet
     "rgba(74, 222, 128, 0.7)",  // 4. Nature Green (green-400)
   ];
 
@@ -41,7 +41,7 @@ export const StickyScroll = ({
     <div
       className="relative h-full flex w-full justify-between overflow-y-auto rounded-md p-10 md:p-20 bg-transparent [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       ref={ref}>
-      
+
       {/* LEFT SIDE: Text & Mobile Images */}
       <div className="relative flex items-start w-full lg:w-1/2 pr-8 md:pr-16">
         <div className="max-w-2xl w-full">
@@ -58,7 +58,7 @@ export const StickyScroll = ({
               {/* Mobile Image (Also gets the shifting glow!) */}
               <Motion.div
                 initial={{ opacity: 0 }}
-                animate={{ 
+                animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                   filter: `drop-shadow(0px 0px 40px ${shadowColors[activeCard % shadowColors.length]})`
                 }}
@@ -80,7 +80,7 @@ export const StickyScroll = ({
           <div className="h-40" />
         </div>
       </div>
-      
+
       {/* --- RIGHT SIDE: The Image Container --- */}
       {/* 5. Animated the drop-shadow filter to create a massive glow around the image */}
       <Motion.div
@@ -94,7 +94,7 @@ export const StickyScroll = ({
         )}>
         {content[activeCard].content ?? null}
       </Motion.div>
-      
+
     </div>
   );
 };

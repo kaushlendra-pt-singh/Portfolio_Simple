@@ -61,7 +61,7 @@ const GlowingEffect = memo(({
         parseFloat(element.style.getPropertyValue("--start")) || 0;
       let targetAngle =
         (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) /
-          Math.PI +
+        Math.PI +
         90;
 
       const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
@@ -117,24 +117,38 @@ const GlowingEffect = memo(({
             "--glowingeffect-border-width": `${borderWidth}px`,
             "--repeating-conic-gradient-times": "5",
 
-            "--gradient":
+            // 1. LIGHT MODE: Bright Sky Blue Palette
+            "--gradient-light":
               variant === "white"
-                ? `repeating-conic-gradient(
-                from 236.84deg at 50% 50%,
-                var(--black),
-                var(--black) calc(25% / var(--repeating-conic-gradient-times))
-              )`
-                : `radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%),
-              radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%),
-              radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%), 
-              radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
+                ? `repeating-conic-gradient(from 236.84deg at 50% 50%, var(--black), var(--black) calc(25% / var(--repeating-conic-gradient-times)))`
+                : `radial-gradient(circle, #0ea5e9 10%, #0ea5e900 20%),
+              radial-gradient(circle at 40% 40%, #38bdf8 5%, #38bdf800 15%),
+              radial-gradient(circle at 60% 60%, #0284c7 10%, #0284c700 20%), 
+              radial-gradient(circle at 40% 60%, #7dd3fc 10%, #7dd3fc00 20%),
               repeating-conic-gradient(
                 from 236.84deg at 50% 50%,
-                #dd7bbb 0%,
-                #d79f1e calc(25% / var(--repeating-conic-gradient-times)),
-                #5a922c calc(50% / var(--repeating-conic-gradient-times)), 
-                #4c7894 calc(75% / var(--repeating-conic-gradient-times)),
-                #dd7bbb calc(100% / var(--repeating-conic-gradient-times))
+                #0ea5e9 0%,
+                #38bdf8 calc(25% / var(--repeating-conic-gradient-times)),
+                #0284c7 calc(50% / var(--repeating-conic-gradient-times)), 
+                #7dd3fc calc(75% / var(--repeating-conic-gradient-times)),
+                #0ea5e9 calc(100% / var(--repeating-conic-gradient-times))
+              )`,
+
+            // 2. DARK MODE: Bright Silver/Slate Palette
+            "--gradient-dark":
+              variant === "white"
+                ? `repeating-conic-gradient(from 236.84deg at 50% 50%, var(--black), var(--black) calc(25% / var(--repeating-conic-gradient-times)))`
+                : `radial-gradient(circle, #f8fafc 10%, #f8fafc00 20%),
+              radial-gradient(circle at 40% 40%, #e2e8f0 5%, #e2e8f000 15%),
+              radial-gradient(circle at 60% 60%, #cbd5e1 10%, #cbd5e100 20%), 
+              radial-gradient(circle at 40% 60%, #94a3b8 10%, #94a3b800 20%),
+              repeating-conic-gradient(
+                from 236.84deg at 50% 50%,
+                #f8fafc 0%,
+                #e2e8f0 calc(25% / var(--repeating-conic-gradient-times)),
+                #cbd5e1 calc(50% / var(--repeating-conic-gradient-times)), 
+                #94a3b8 calc(75% / var(--repeating-conic-gradient-times)),
+                #f8fafc calc(100% / var(--repeating-conic-gradient-times))
               )`
           }
         }
@@ -151,7 +165,10 @@ const GlowingEffect = memo(({
             "rounded-[inherit]",
             'after:content-[""] after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))]',
             "after:[border:var(--glowingeffect-border-width)_solid_transparent]",
-            "after:[background:var(--gradient)] after:bg-fixed",
+
+            // 3. THE MAGIC TOGGLE: It pulls --gradient-light normally, and --gradient-dark when the .dark class is active!
+            "after:[background:var(--gradient-light)] dark:after:[background:var(--gradient-dark)] after:bg-fixed",
+
             "after:opacity-(--active) after:transition-opacity after:duration-300",
             "after:[mask-clip:padding-box,border-box]",
             "after:mask-intersect",

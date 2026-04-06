@@ -3,6 +3,7 @@ import Header from './reusable/Header.jsx';
 import MainSection from './Sections/MainSection.jsx';
 import AboutSection from './Sections/AboutSection.jsx';
 import ProjectsSection from './Sections/ProjectsSection.jsx';
+import ContactSection from './Sections/ContactSection.jsx';
 import './App.css'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       </div>
       <AboutSection />
       <ProjectsSection />
+      <ContactSection />
     </>
   )
 }
