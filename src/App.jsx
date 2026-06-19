@@ -1,4 +1,5 @@
 import CustomProgressBar from './reusable/ScrollTracker.jsx';
+import BackToTop from './reusable/BackToTop.jsx';
 import Header from './reusable/Header.jsx';
 import HeroSection from './Sections/HeroSection.jsx';
 import AboutSection from './Sections/AboutSection.jsx';
@@ -25,6 +26,7 @@ function App() {
     <>
       <main ref={containerRef} className='relative h-screen w-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory scroll-smooth bg-background'>
         <CustomProgressBar containerRef={containerRef} />
+        <BackToTop containerRef={containerRef} />
         {/* Keep it commented, otherwise will have to change the architecture of whole page. */}
         {/* <FloatingNav containerRef={containerRef} navItems={navItems} /> */}
         <section id='home' className='snap-start flex flex-col bg-background h-screen w-full overflow-hidden'>

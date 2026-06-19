@@ -16,7 +16,7 @@ const Highlight = ({ children, color = "sky" }) => {
         green: "text-green-400 bg-green-400/10 border-green-400/30",
     };
     return (
-        <span className={`inline-block px-1.5 py-0.5 rounded border text-xs font-semibold tracking-wide font-mono mx-0.5 ${colorMap[color]}`}>
+        <span className={`inline-block px-1.5 py-0.5 rounded border text-sm font-semibold tracking-wide font-mono mx-0.5 ${colorMap[color]}`}>
             {children}
         </span>
     );
@@ -64,7 +64,7 @@ const TagRow = ({ tags, color }) => (
 const BulletList = ({ items }) => (
     <ul className="mt-3 space-y-2">
         {items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-foreground/75">
+            <li key={i} className="flex items-start gap-2 text-base text-foreground/75">
                 <span className="mt-1.75 h-1 w-1 shrink-0 rounded-full bg-foreground/40" />
                 <span>{item}</span>
             </li>
@@ -79,7 +79,7 @@ const content = [
         title: 'Professional Me',
         description: (
             <div>
-                <p className="text-sm leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/80">
                     I'm a{" "}
                     <Tip tip="Building end-to-end: both frontend & backend systems" align="left">
                         Full Stack
@@ -90,7 +90,7 @@ const content = [
                     </Tip>
                     {" "}who thrives at the intersection of intelligent systems and immersive web design.
                 </p>
-                <p className="text-sm leading-relaxed text-foreground/80 mt-3">
+                <p className="text-base leading-relaxed text-foreground/80 mt-3">
                     I turn complex data and ML architectures into clean, high-performance,
                     and beautifully interactive products.
                 </p>
@@ -107,7 +107,7 @@ const content = [
         title: 'Present',
         description: (
             <div>
-                <p className="text-sm leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/80">
                     Bridging heavy backend logic with pixel-perfect frontends.
                 </p>
                 <BulletList items={[
@@ -137,9 +137,9 @@ const content = [
         title: 'My Way',
         description: (
             <div>
-                <p className="text-sm leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/80">
                     Great software shouldn't just <em>function</em> — it should feel <em>effortless</em>.
-                    My philosophy:
+                    <br></br>My philosophy:
                 </p>
                 <BulletList items={[
                     "Clean, maintainable code above all else",
@@ -151,9 +151,6 @@ const content = [
                         <Highlight color="purple">transition timing</Highlight>{" "}in the UI
                     </>,
                 ]} />
-                <p className="text-xs text-foreground/50 mt-4 italic">
-                    "The details are not the details. They make the design." — Charles Eames
-                </p>
             </div>
         ),
         content: (
@@ -166,12 +163,12 @@ const content = [
         title: 'Beyond the Code',
         description: (
             <div>
-                <p className="text-sm leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/80">
                     When I'm not shipping features, you'll find me:
                 </p>
                 <BulletList items={[
                     <>Exploring high-fantasy{" "}
-                        <Tip tip="Currently: Mistborn, Stormlight Archive" align="left">
+                        <Tip tip="My Fav: LOTR, GOT and Star Wars" align="left">
                             worlds & lore
                         </Tip>
                     </>,

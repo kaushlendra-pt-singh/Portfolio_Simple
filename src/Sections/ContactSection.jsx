@@ -104,7 +104,7 @@ export default function ContactSection() {
                         </h2>
 
                         {/* 2. TEXT SCALED DOWN: Now text-sm to match the smaller form */}
-                        <p className="text-sm font-body text-foreground/70 max-w-sm leading-relaxed">
+                        <p className="text-base font-body text-foreground/70 max-w-sm leading-relaxed">
                             Want to collaborate or have a question? Drop a message below and I'll try to connect as soon as possible.
                         </p>
 
