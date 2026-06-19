@@ -15,8 +15,8 @@ export const WobbleCard = ({
   const handleMouseMove = (event) => {
     const { clientX, clientY } = event;
     const rect = event.currentTarget.getBoundingClientRect();
-    const x = (clientX - (rect.left + rect.width / 2)) / 20;
-    const y = (clientY - (rect.top + rect.height / 2)) / 20;
+    const x = (clientX - (rect.left + rect.width / 2)) / 15;
+    const y = (clientY - (rect.top + rect.height / 2)) / 15;
     setMousePosition({ x, y });
   };
   return (

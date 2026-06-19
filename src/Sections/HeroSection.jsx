@@ -11,9 +11,9 @@ function HeroSection() {
     const words = ['Full Stack Web Developer.', 'AI/ML Engineer.', 'Tech Enthusiast.']
     return (
         <hero className='flex pt-[4%] w-full flex-col h-full justify-between relative'>
-            <BackgroundRippleEffect rows={11} cols={25} cellSize={48} borderColor='rgba(59, 130, 246, 0.3)' fillColor='rgba(14, 165, 233, 0.4)' />
+            <BackgroundRippleEffect rows={12} cols={27} cellSize={56} borderColor='rgba(59, 130, 246, 0.3)' fillColor='rgba(14, 165, 233, 0.4)' />
             <div className='flex flex-5 w-full h-[70%] items-center'>
-                <div className='ml-4 inline-block pl-10 flex-1 h-full justify-evenly leading-2 relative'>
+                <div className='ml-6 inline-block pl-10 flex-1 h-full justify-evenly leading-2 relative'>
                     <p className='text-3xl mb-2.5 pl-1 mt-1'>Hi there, It's</p>
                     <p className='text-7xl mr-2 font-heading'>KAUSHLENDRA</p>
                     <p className='text-6xl mt-2.5 font-heading'>PRATAP SINGH</p>
@@ -42,18 +42,22 @@ function HeroSection() {
             </div>
 
             <div className='w-full flex-2 items-center flex justify-evenly mb-2'>
-                <div className="w-full flex justify-center -mt-12">
-                    {/* Added the custom inset shadow right here in the containerClassName */}
+                {/* 1. THE Z-10 SHIELD: This lifts the card above the background ripple so it catches your mouse */}
+                <div className="w-full flex justify-center -mt-12 relative z-10 px-4">
+                    
+                    {/* 2. THE RESTORED WOBBLE CARD */}
                     <WobbleCard
                         containerClassName="max-w-4xl w-full bg-background border-sky-500 border-[1.5px] rounded-2xl min-h-0 h-[150px] shadow-[inset_0_0_40px_rgba(14,165,233,0.5)]"
-                        className="flex items-center justify-center"
+                        // 3. THE CENTERING FIX: h-full w-full ensures the inner div stretches, making justify-center work perfectly
+                        className="flex h-full w-full flex-col items-center justify-center p-6"
                     >
-                        <p className="text-center text-foreground/80 text-sm md:text-base font-light tracking-wide drop-shadow-[15px_15px_15px_rgba(0,0,211,0.5)]">
+                        <p className="text-center text-foreground/80 text-sm md:text-base font-light tracking-wide drop-shadow-[15px_15px_15px_rgba(0,0,211,0.5)] m-0">
                             A Full Stack & AI/ML Engineer specializing in the intersection of intelligent systems and immersive web design.
                             I architect scalable backend infrastructure, integrate cutting-edge machine learning models, and deliver it all
                             through pixel-perfect, high-performance user interfaces.
                         </p>
                     </WobbleCard>
+                    
                 </div>
             </div>
         </hero>
