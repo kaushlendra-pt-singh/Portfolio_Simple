@@ -3,6 +3,7 @@
 @variant dark (&:where(.dark, .dark *));
 
 @import "tailwindcss";
+
 /* 1. Map your custom variables to the new Tailwind v4 @theme engine */
 @theme {
   --color-background: var(--background);
@@ -11,27 +12,36 @@
   --color-border: var(--border);
   --color-primary: var(--primary);
   --font-heading: 'Lato', serif;
-  --font-para: 'Poppins', sans-serif; 
+  --font-para: 'Poppins', sans-serif;
 }
 
 /* 2. Define standard CSS variables and universal styles */
 @layer base {
+
   /* LIGHT MODE (The Default) */
   :root {
     --background: #ffffff;
-    --foreground: #171717; /* Very dark gray text */
-    --surface: #dcdbdb;    /* Light gray for cards/sections */
-    --border: #e5e5e5;     /* Subtle borders */
-    --primary: #0a0a0a;    /* Deep black for primary buttons/accents */
+    --foreground: #171717;
+    --surface: #dcdbdb;
+    --border: #e5e5e5;
+    --primary: #0a0a0a;
+    /* Sky Blue Ripple Colors */
+    --ripple-border: rgba(59, 130, 246, 0.3);
+    --ripple-fill: rgba(14, 165, 233, 0.4);
   }
 
   /* DARK MODE (The Soft Black Aesthetic) */
   .dark {
-    --background: #0a0a0a; /* Deep, rich black (perfect for glows) */
-    --foreground: #ededed; /* Soft white text to reduce eye strain */
-    --surface: #171717;    /* Soft/Light black for elevated cards */
-    --border: #262626;     /* Visible but subtle dark border */
-    --primary: #ffffff;    /* Stark white for primary accents */
+    --background: #0a0a0a;
+    /* Level 3: Soft White for all body text (Slate-200) */
+    --foreground: #e2e8f0;
+    --surface: #171717;
+    --border: #262626;
+    --primary: #ffffff;
+
+    /* Peak Brightness Ripple */
+    --ripple-border: rgba(255, 255, 255,0);
+    --ripple-fill: rgba(0, 0, 0, 1);
   }
 
   /* Universal CSS */
@@ -56,16 +66,17 @@
 }
 
 @theme inline {
-  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1
-    var(--delay, 0ms);
+  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
 
   @keyframes cell-ripple {
     0% {
       opacity: 0.4;
     }
+
     50% {
       opacity: 0.8;
     }
+
     100% {
       opacity: 0.4;
     }

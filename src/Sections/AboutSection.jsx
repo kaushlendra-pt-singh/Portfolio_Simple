@@ -64,7 +64,7 @@ const TagRow = ({ tags, color }) => (
 const BulletList = ({ items }) => (
     <ul className="mt-3 space-y-2">
         {items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-base text-foreground/75">
+            <li key={i} className="flex items-start gap-2 text-base text-foreground/85">
                 <span className="mt-1.75 h-1 w-1 shrink-0 rounded-full bg-foreground/40" />
                 <span>{item}</span>
             </li>
@@ -79,7 +79,7 @@ const content = [
         title: 'Professional Me',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/90">
                     I'm a{" "}
                     <Tip tip="Building end-to-end: both frontend & backend systems" align="left">
                         Full Stack
@@ -90,7 +90,7 @@ const content = [
                     </Tip>
                     {" "}who thrives at the intersection of intelligent systems and immersive web design.
                 </p>
-                <p className="text-base leading-relaxed text-foreground/80 mt-3">
+                <p className="text-base leading-relaxed text-foreground/90 mt-3">
                     I turn complex data and ML architectures into clean, high-performance,
                     and beautifully interactive products.
                 </p>
@@ -107,7 +107,7 @@ const content = [
         title: 'Present',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/90">
                     Bridging heavy backend logic with pixel-perfect frontends.
                 </p>
                 <BulletList items={[
@@ -137,7 +137,7 @@ const content = [
         title: 'My Way',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/90">
                     Great software shouldn't just <em>function</em> — it should feel <em>effortless</em>.
                     <br></br>My philosophy:
                 </p>
@@ -163,7 +163,7 @@ const content = [
         title: 'Beyond the Code',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/80">
+                <p className="text-base leading-relaxed text-foreground/90">
                     When I'm not shipping features, you'll find me:
                 </p>
                 <BulletList items={[
@@ -203,9 +203,9 @@ export default function AboutSection() {
                     initial={{ opacity: 0.5, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.8, ease: "easeInOut" }}
-                    className="pointer-events-auto shrink-0 rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm border border-white/20 dark:bg-slate-900/20 dark:border-slate-700/30"
+                    className="pointer-events-auto shrink-0 rounded-full px-4 py-2 backdrop-blur-sm"
                 >
-                    <span className="bg-linear-to-br from-slate-800 to-slate-500 dark:from-slate-300 dark:to-slate-500 bg-clip-text text-center text-3xl font-bold font-heading tracking-tight text-transparent md:text-4xl lg:text-5xl">
+                    <span className="bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 bg-clip-text text-center text-3xl font-bold font-heading tracking-tight text-transparent md:text-4xl lg:text-5xl">
                         ABOUT ME
                     </span>
                 </Motion.h1>
@@ -220,7 +220,7 @@ export default function AboutSection() {
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pointer-events-auto rounded-full bg-sky-500 px-8 py-3 font-body font-medium text-white shadow-[0_0_20px_rgba(56,189,248,0.6)] transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)]"
+                    className="pointer-events-auto rounded-full bg-sky-500 px-8 py-3 font-body font-medium text-white shadow-[0_0_20px_rgba(56,189,248,0.6)] transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] dark:hover:bg-slate-200 dark:hover:shadow-[0_0_40px_rgba(203,213,225,0.7)]"
                 >
                     Download Resume
                 </Motion.a>

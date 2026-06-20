@@ -79,7 +79,7 @@ export default function ContactSection() {
                 initial={{ opacity: 0.5, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.8, ease: "easeInOut" }}
-                className="shrink-0 bg-linear-to-br from-slate-800 to-slate-500 dark:from-slate-300 dark:to-slate-500 py-2 bg-clip-text text-center text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-transparent drop-shadow-[0_0_30px_rgba(56,189,248,0.4)]"
+                className="shrink-0 bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 py-2 bg-clip-text text-center text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-transparent drop-shadow-[0_0_30px_rgba(56,189,248,0.4)]"
             >
                 CONTACT
             </Motion.h1>
@@ -100,7 +100,7 @@ export default function ContactSection() {
                         {/* 1. TEXT SCALED DOWN: Now text-2xl to 3xl */}
                         <h2 className="text-2xl lg:text-3xl font-heading font-bold text-foreground leading-tight">
                             Let's build <br />
-                            <span className="text-sky-500">something together.</span>
+                            <span className="text-sky-500 dark:text-slate-50! dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]">something together.</span>
                         </h2>
 
                         {/* 2. TEXT SCALED DOWN: Now text-sm to match the smaller form */}
@@ -113,7 +113,7 @@ export default function ContactSection() {
                             <FloatingDock
                                 items={items}
                                 // ml-0 and mr-auto overrides Aceternity's default mx-auto, forcing it to align left with your text!
-                                desktopClassName="bg-background! ml-0 mr-auto bg-white/50 dark:bg-slate-900/50 border border-sky-300/80 dark:border-slate-700/50"
+                                desktopClassName="bg-background! ml-0 mr-auto bg-white/50 dark:bg-slate-900/50 border border-sky-300/80 dark:border-slate-600/50"
                                 mobileClassName="translate-y-0"
                             />
                         </div>
@@ -144,7 +144,7 @@ export default function ContactSection() {
                                     required
                                     placeholder="John Doe"
                                     // Padding reduced to py-2.5
-                                    className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-foreground placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all dark:border-slate-700"
+                                    className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-foreground placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all dark:border-slate-700 dark:focus:border-slate-300 dark:focus:ring-slate-300"
                                 />
                             </div>
 
@@ -156,7 +156,7 @@ export default function ContactSection() {
                                     name="user_email"
                                     required
                                     placeholder="john@example.com"
-                                    className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-foreground placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all dark:border-slate-700"
+                                    className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-foreground placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all dark:border-slate-700 dark:focus:border-slate-300 dark:focus:ring-slate-300"
                                 />
                             </div>
 
@@ -168,7 +168,7 @@ export default function ContactSection() {
                                     required
                                     placeholder="What's on your mind?"
                                     // Height reduced to min-h-[100px]
-                                    className="w-full min-h-25 resize-none rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-foreground placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all dark:border-slate-700"
+                                    className="w-full min-h-25 resize-none rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-foreground placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all dark:border-slate-700 dark:focus:border-slate-300 dark:focus:ring-slate-300"
                                 ></textarea>
                             </div>
 
@@ -177,7 +177,13 @@ export default function ContactSection() {
                                 type="submit"
                                 disabled={status === 'Sending...'}
                                 // Padding reduced to py-2.5
-                                className="cursor-pointer mt-1 w-full rounded-full bg-sky-500 px-8 py-2.5 font-body text-sm font-medium text-white shadow-md shadow-sky-500/40 transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-sky-500/60 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
+                                className="cursor-pointer mt-1 w-full rounded-full px-8 py-2.5 font-body text-sm font-medium transition-all hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 
+                                
+                                /* LIGHT MODE: Explicit blue background and blue glow */
+                                bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.5)] hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] 
+                                
+                                /* DARK MODE: Explicit bright white background and pure white peak-brightness glow */
+                                dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-white dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.9)]"
                             >
                                 {status}
                             </button>
