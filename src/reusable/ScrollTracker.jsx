@@ -16,7 +16,7 @@ export default function CustomProgressBar({ containerRef }) {
             style={{
                 height: barHeight,
             }}
-            className="fixed top-0 right-2 md:right-5 w-0.5 md:w-0.7 z-[9999] origin-top bg-sky-500 dark:bg-slate-300 shadow-[0_0_12px_rgba(14,165,233,0.8)] dark:shadow-[0_0_12px_rgba(203,213,225,0.8)]"
+            className="fixed top-0 right-2 md:right-5 w-0.5 md:w-0.7 z-9999 origin-top bg-sky-500 dark:bg-slate-300 shadow-[0_0_12px_rgba(14,165,233,0.8)] dark:shadow-[0_0_12px_rgba(203,213,225,0.8)]"
         >
             {/* THE SOLID GLOWING TIP */}
             <motion.div

@@ -38,7 +38,7 @@ export default function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/50 text-slate-800 backdrop-blur-sm transition-all hover:scale-110 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-200 dark:hover:bg-slate-800"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full cursor-pointer border border-slate-200 bg-white/50 text-slate-800 backdrop-blur-sm transition-all hover:scale-110 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-200 dark:hover:bg-slate-800"
             aria-label="Toggle Dark Mode"
         >
             <motion.div
