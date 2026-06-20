@@ -205,7 +205,7 @@ export default function AboutSection() {
                     transition={{ delay: 0.1, duration: 0.8, ease: "easeInOut" }}
                     className="pointer-events-auto shrink-0 rounded-full px-4 py-2 backdrop-blur-sm"
                 >
-                    <span className="bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 bg-clip-text text-center text-3xl font-bold font-heading tracking-tight text-transparent md:text-4xl lg:text-5xl">
+                    <span className="bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 bg-clip-text text-center text-3xl font-bold font-heading tracking-tight text-transparent md:text-4xl lg:text-5xl drop-shadow-[0_0_30px_rgba(56,189,248,0.5)] dark:drop-shadow-[0_0_30px_rgba(150,150,150,0.5)]">
                         ABOUT ME
                     </span>
                 </Motion.h1>

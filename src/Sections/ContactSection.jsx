@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { motion as Motion } from 'framer-motion';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 import { FloatingDock } from '../components/ui/floating-dock';
-import { IconBrandX, IconBrandLinkedin, IconBrandGithub, IconBrandInstagram } from "@tabler/icons-react";
+import { IconBrandX, IconBrandLinkedin, IconBrandGithub, IconBrandInstagram, IconBrandGmail } from "@tabler/icons-react";
 
 export default function ContactSection() {
     const formRef = useRef();
@@ -37,6 +37,13 @@ export default function ContactSection() {
                 <IconBrandGithub className="h-full w-full text-neutral-600 transition-colors duration-300 hover:text-black dark:text-neutral-300 dark:hover:text-white" />
             ),
             href: 'https://github.com/kaushlendra-pt-singh'
+        },
+        {
+            title: 'Gmail',
+            icon: (
+                <IconBrandGmail className="h-full w-full text-neutral-600 transition-all duration-300 hover:text-red-500 dark:text-neutral-300 dark:hover:text-red-400" />
+            ),
+            href: 'mailto:kaushlendrapratapsingh631@gmail.com?subject=Regarding%20Your%20Portfolio'
         },
     ];
 
@@ -79,7 +86,7 @@ export default function ContactSection() {
                 initial={{ opacity: 0.5, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.8, ease: "easeInOut" }}
-                className="shrink-0 bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 py-2 bg-clip-text text-center text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-transparent drop-shadow-[0_0_30px_rgba(56,189,248,0.4)]"
+                className="shrink-0 bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 py-2 bg-clip-text text-center text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-transparent drop-shadow-[0_0_30px_rgba(56,189,248,0.5)] dark:drop-shadow-[0_0_30px_rgba(150,150,150,0.5)]"
             >
                 CONTACT
             </Motion.h1>
@@ -131,7 +138,7 @@ export default function ContactSection() {
                             ref={formRef}
                             onSubmit={sendEmail}
                             // Form max-width tightened to max-w-md, gap reduced to gap-4, padding to p-6
-                            className='flex w-full max-w-md flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white/50 p-5 shadow-[0_0_40px_rgba(56,189,248,0.4)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50'
+                            className='flex w-full max-w-md flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white/50 p-5 shadow-[0_0_40px_rgba(56,189,248,0.4)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_40px_rgba(150,150,150,0.4)]'
                         >
                             {/* Time stamp */}
                             <input type="hidden" name="time" value={new Date().toLocaleString()} />
