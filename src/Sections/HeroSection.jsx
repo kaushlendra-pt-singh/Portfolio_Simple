@@ -11,9 +11,9 @@ function HeroSection() {
     return (
         <hero className='flex pt-[4%] w-full flex-col h-full justify-between relative'>
             <BackgroundRippleEffect
-                rows={12}
-                cols={27}
-                cellSize={56}
+                rows={9}
+                cols={21}
+                cellSize={72}
                 borderColor='var(--ripple-border)'
                 fillColor='var(--ripple-fill)'
             />
