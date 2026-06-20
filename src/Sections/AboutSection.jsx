@@ -45,9 +45,9 @@ const Tip = ({ children, tip, align = "right" }) => {
             <span className="underline decoration-dotted decoration-foreground/40 underline-offset-2">
                 {children}
             </span>
-            <span className={`pointer-events-none absolute -top-10 ${posClass} whitespace-nowrap rounded-md bg-foreground/90 px-3 py-1.5 text-xs text-background opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 shadow-lg`}>
+            <span className={`pointer-events-none absolute -top-10 ${posClass} whitespace-nowrap rounded-md bg-aboutForeground px-3 py-1.5 text-xs text-background opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 shadow-lg`}>
                 {tip}
-                <span className={`absolute top-full ${arrowClass} border-4 border-transparent border-t-foreground/90`} />
+                <span className={`absolute top-full ${arrowClass} border-4 border-transparent border-t-aboutForeground`} />
             </span>
         </span>
     );
@@ -64,7 +64,7 @@ const TagRow = ({ tags, color }) => (
 const BulletList = ({ items }) => (
     <ul className="mt-3 space-y-2">
         {items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-base text-foreground/85">
+            <li key={i} className="flex items-start gap-2 text-base text-aboutForeground">
                 <span className="mt-1.75 h-1 w-1 shrink-0 rounded-full bg-foreground/40" />
                 <span>{item}</span>
             </li>
@@ -79,7 +79,7 @@ const content = [
         title: 'Professional Me',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/90">
+                <p className="text-base leading-relaxed text-aboutForeground">
                     I'm a{" "}
                     <Tip tip="Building end-to-end: both frontend & backend systems" align="left">
                         Full Stack
@@ -90,7 +90,7 @@ const content = [
                     </Tip>
                     {" "}who thrives at the intersection of intelligent systems and immersive web design.
                 </p>
-                <p className="text-base leading-relaxed text-foreground/90 mt-3">
+                <p className="text-base leading-relaxed text-aboutForeground mt-3">
                     I turn complex data and ML architectures into clean, high-performance,
                     and beautifully interactive products.
                 </p>
@@ -107,7 +107,7 @@ const content = [
         title: 'Present',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/90">
+                <p className="text-base leading-relaxed text-aboutForeground">
                     Bridging heavy backend logic with pixel-perfect frontends.
                 </p>
                 <BulletList items={[
@@ -137,7 +137,7 @@ const content = [
         title: 'My Way',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/90">
+                <p className="text-base leading-relaxed text-aboutForeground">
                     Great software shouldn't just <em>function</em> — it should feel <em>effortless</em>.
                     <br></br>My philosophy:
                 </p>
@@ -163,7 +163,7 @@ const content = [
         title: 'Beyond the Code',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-foreground/90">
+                <p className="text-base leading-relaxed text-aboutForeground">
                     When I'm not shipping features, you'll find me:
                 </p>
                 <BulletList items={[
