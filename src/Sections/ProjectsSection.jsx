@@ -9,20 +9,26 @@ function ProjectsSection() {
     const content = [
         {
             title: 'NLP Sentiment Analysis',
-            text: 'Analyze text with high-speed LLM cloud services to determine deep emotional context.',
+            text: 'Analyze deep sentiment of texts with high-speed LLM cloud services.',
             image: NLP,
+            repoLink: "https://github.com/kaushlendra-pt-singh/NLP_Sentiment_Analysis",
+            liveLink:"https://nlp-sentiment-analysis.netlify.app/",
             id: 1
         },
         {
             title: 'Agentic AI Honeypot',
-            text: 'A honeypot for spammers which detects spam by itself and extracts the necessary details and information.',
+            text: 'A honeypot for spammers which detects spam and extracts the key details.',
             image: Agent,
+            repoLink: "https://github.com/kaushlendra-pt-singh/Agentic_AI_Honey_Pot",
+            liveLink:"",
             id: 2
         },
         {
             title: 'Civic Connect App',
             text: 'An app build for people to easily report problems and reach out to government.',
             image: Civic,
+            repoLink: "https://github.com/kaushlendra-pt-singh/civic-connnect-app",
+            liveLink:"",
             id: 3
         },
     ]
@@ -44,7 +50,7 @@ function ProjectsSection() {
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl px-2 md:px-6 h-full pb-2">
                     {content.map((elem) => (
                         <div key={elem.id} className="flex justify-center h-full w-full">
-                            <ProjectCards image={elem.image} text={elem.text} title={elem.title} />
+                            <ProjectCards image={elem.image} text={elem.text} title={elem.title} repoLink={elem.repoLink} liveLink={elem.liveLink} />
                         </div>
                     ))}
                 </div>

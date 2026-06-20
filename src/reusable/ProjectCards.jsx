@@ -2,7 +2,7 @@ import React from 'react'
 import { CardContainer, CardBody, CardItem } from '../components/ui/3d-card';
 import { motion as Motion } from 'framer-motion';
 
-function ProjectCards({ image, text, title }) {
+function ProjectCards({ image, text, title, repoLink, liveLink }) {
     return (
         <CardContainer className="inter-var w-full h-full" containerClassName="h-full w-full">
 
@@ -33,12 +33,12 @@ function ProjectCards({ image, text, title }) {
                 </CardItem>
 
                 {/* --- BOTTOM: Button --- */}
-                <CardItem translateZ={40} className="mt-auto w-full flex justify-center shrink-0">
+                <CardItem translateZ={40} className="mt-auto w-full flex flex-row gap-1.5 justify-center shrink-0">
                     <Motion.a
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1, duration: 0.3 }}
-                        href='https://github.com/kaushlendra-pt-singh'
+                        href={liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         /* FIXED: Completely replaced generic shadow classes with strict Light vs Dark arbitrary RGBA strings */
@@ -49,6 +49,22 @@ function ProjectCards({ image, text, title }) {
                         dark:bg-slate-200 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-white dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.9)]"
                     >
                         Try It Out
+                    </Motion.a>
+                    <Motion.a
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1, duration: 0.3 }}
+                        href={repoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        /* FIXED: Completely replaced generic shadow classes with strict Light vs Dark arbitrary RGBA strings */
+                        className="rounded-full px-6 py-2 font-body text-sm font-medium transition-all hover:scale-105 
+                        
+                        bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.5)] hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] 
+                        
+                        dark:bg-slate-200 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-white dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.9)]"
+                    >
+                        Visit Repo
                     </Motion.a>
                 </CardItem>
 
