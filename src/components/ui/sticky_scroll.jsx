@@ -3,6 +3,9 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion as Motion, useMotionValue, animate } from "motion/react";
 import { cn } from "@/lib/utils";
 
+// Must match the SECTION_IDS order and IDs in App.jsx.
+const SECTION_IDS = ['home', 'about', 'projects', 'contact'];
+
 export const StickyScroll = ({ content, contentClassName }) => {
   const [activeCard, setActiveCard] = useState(0);
   const cardLength = content.length;
@@ -14,9 +17,10 @@ export const StickyScroll = ({ content, contentClassName }) => {
   const lastExitTime = useRef(0);
   const isExiting = useRef(false); // hard-blocks ALL wheel events during outer nav
 
-  const EXIT_COOLDOWN = 2200;
-  const WHEEL_THRESHOLD = 200;
+  const EXIT_COOLDOWN = 2200; // ms before we allow another outer-page exit
+  const WHEEL_THRESHOLD = 200;  // accumulated deltaY needed to flip a card
 
+  // Keep activeCard in sync with the spring value.
   useEffect(() => {
     const unsub = progressMV.on("change", (v) => {
       const idx = Math.round(v);
@@ -37,24 +41,49 @@ export const StickyScroll = ({ content, contentClassName }) => {
   }, [progressMV, cardLength]);
 
   const exitToSection = useCallback((id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+    // ── The root-cause fix for wobble ────────────────────────────────────
+    //
+    // Old approach: el.scrollIntoView({ behavior: "smooth" })
+    //   → The browser smoothly scrolls the snap container toward the target,
+    //     but snap-mandatory simultaneously fires its own "correction" scroll.
+    //     Two competing animations = visible shake / wobble on neighboring sections.
+    //
+    // New approach: mainEl.scrollTo({ top: exactSnapPoint, behavior: "smooth" })
+    //   → We scroll the snap container DIRECTLY to an exact snap point.
+    //     snap-mandatory has nothing to "correct" because we're already landing
+    //     on the snap point. Single animation, zero fighting, zero wobble.
+    //
+    const mainEl = document.querySelector('main');
+    const idx = SECTION_IDS.indexOf(id);
+    if (!mainEl || idx === -1) return;
+
     lastExitTime.current = Date.now();
     isExiting.current = true;
     wheelAccum.current = 0;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-    // Hold exit lock until the outer snap scroll fully settles
+
+    mainEl.scrollTo({
+      top: idx * mainEl.clientHeight,
+      behavior: 'smooth',
+    });
+
+    // Hold the exit lock until the outer snap scroll fully settles.
+    // App.jsx's own scroll lock (900 ms) also activates from its wheel handler,
+    // but since StickyScroll owns the exit here, we need our own 2400 ms lock
+    // to keep swallowing events from within the About section's div during the
+    // transition (capture phase still routes those events to us, not to App).
     setTimeout(() => { isExiting.current = false; }, 2400);
   }, []);
 
   const handleWheel = useCallback((e) => {
-    // Always prevent & stop — this is the primary fix for outer-section wobble.
-    // The outer snap container must never receive wheel events while we own them.
+    // ── Always prevent default + stop propagation ────────────────────────
+    // This is what keeps the outer snap container deaf to wheel events while
+    // the About section owns the scroll. Combined with { capture: true } below,
+    // stopPropagation() kills the bubble phase so App.jsx's handler never fires.
     e.preventDefault();
     e.stopPropagation();
 
-    if (isExiting.current) return;
-    if (isAnimating.current) return;
+    if (isExiting.current) return; // hard block during outer nav animation
+    if (isAnimating.current) return; // block during internal card spring
 
     wheelAccum.current += e.deltaY;
     clearTimeout(wheelTimer.current);
@@ -63,7 +92,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
     if (Math.abs(wheelAccum.current) < WHEEL_THRESHOLD) return;
 
     const direction = wheelAccum.current > 0 ? 1 : -1;
-    wheelAccum.current = 0;
+    wheelAccum.current = 0; // consume accumulated delta
 
     const currentCard = Math.round(progressMV.get());
     const nextCard = currentCard + direction;
@@ -83,12 +112,13 @@ export const StickyScroll = ({ content, contentClassName }) => {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    // capture:true intercepts before the event can reach the outer snap container
+    // capture:true → our handler runs in the capture phase (before bubbling),
+    // so we intercept the event before it can reach App.jsx's bubble handler.
     el.addEventListener("wheel", handleWheel, { passive: false, capture: true });
     return () => el.removeEventListener("wheel", handleWheel, { capture: true });
   }, [handleWheel]);
 
-  // Touch support
+  // ── Touch support ────────────────────────────────────────────────────────
   const touchStartY = useRef(0);
   const handleTouchStart = (e) => { touchStartY.current = e.touches[0].clientY; };
   const handleTouchEnd = (e) => {
@@ -118,7 +148,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
       onTouchEnd={handleTouchEnd}
       className="relative h-full flex w-full justify-between rounded-md px-10 md:px-20 bg-transparent overflow-hidden"
     >
-      {/* LEFT: Text cards */}
+      {/* LEFT: Stacked text cards animated by spring */}
       <div className="relative flex items-start w-full lg:w-1/2 pr-8 md:pr-16 overflow-hidden">
         <div className="w-full h-full relative">
           {content.map((item, index) => {
@@ -140,7 +170,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
                   {item.title}
                 </h2>
 
-                {/* Mobile image */}
+                {/* Mobile: image inline between title and description */}
                 <Motion.div
                   animate={{
                     filter: `drop-shadow(0px 0px 40px ${shadowColors[activeCard % shadowColors.length]})`,
@@ -150,12 +180,12 @@ export const StickyScroll = ({ content, contentClassName }) => {
                   {item.content}
                 </Motion.div>
 
-                {/* Description — accepts ReactNode */}
+                {/* Description accepts ReactNode */}
                 <div className="text-base mt-6 lg:mt-10 max-w-md text-foreground/80 font-body leading-relaxed">
                   {item.description}
                 </div>
 
-                {/* Dot indicators */}
+                {/* Clickable dot indicators */}
                 <div className="flex gap-2 mt-8">
                   {content.map((_, i) => (
                     <button
@@ -177,7 +207,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
         </div>
       </div>
 
-      {/* RIGHT: Image panel */}
+      {/* RIGHT: Sticky image panel with cross-fade */}
       <Motion.div
         animate={{
           filter: `drop-shadow(0px 0px 60px ${shadowColors[activeCard % shadowColors.length]})`,
