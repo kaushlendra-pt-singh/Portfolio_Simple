@@ -20,7 +20,7 @@ function HeroSection() {
 
             <div className='flex flex-5 w-full h-[70%] items-center'>
                 <div className='ml-6 inline-block pl-10 flex-1 h-full justify-evenly leading-2 relative'>
-                    <p className='text-3xl mb-2.5 pl-1 mt-1 font-medium'>Hi there, It's</p>
+                    <p className='text-3xl mb-2.5 pl-1 mt-1 font-medium'>Hello, I'm</p>
 
                     <p className='text-7xl mr-2 font-heading bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-300 bg-clip-text text-transparent drop-shadow-sm'>
                         KAUSHLENDRA
@@ -57,11 +57,46 @@ function HeroSection() {
                         className="flex h-full w-full flex-col items-center justify-center p-6"
                     >
                         {/* Slightly boosted the text drop-shadow to match the new border intensity */}
-                        <p className="text-center text-foreground/80 text-sm md:text-base font-light tracking-wide drop-shadow-[15px_15px_15px_rgba(0,0,211,0.5)] dark:drop-shadow-[5px_5px_15px_rgba(255,255,255,0.35)] m-0">
-                            A Full Stack & AI/ML Engineer specializing in the intersection of intelligent systems and immersive web design.
-                            I architect scalable backend infrastructure, integrate cutting-edge machine learning models, and deliver it all
-                            through pixel-perfect, high-performance user interfaces.
-                        </p>
+                        {/* Replaced Paragraph with a 6-Point Statistics Grid */}
+                        <div className="grid w-full grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-2 text-center drop-shadow-[10px_10px_15px_rgba(0,0,211,0.3)] dark:drop-shadow-[2px_2px_10px_rgba(255,255,255,0.2)]">
+
+                            {/* Point 1 */}
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">3+ Years</span>
+                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">Building</span>
+                            </div>
+
+                            {/* Point 2 */}
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">5+ Projects</span>
+                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">Shipped</span>
+                            </div>
+
+                            {/* Point 3 */}
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">Web + AI/ML</span>
+                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">Engineer</span>
+                            </div>
+
+                            {/* Point 4 */}
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">Open Source</span>
+                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">Contributor</span>
+                            </div>
+
+                            {/* Point 5: Highlighting your specialized tech stack */}
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">Agentic AI</span>
+                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">& NLP Focused</span>
+                            </div>
+
+                            {/* Point 6: Highlighting your competitive building experience */}
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">3+ Hackathons</span>
+                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">Conquered</span>
+                            </div>
+
+                        </div>
                     </WobbleCard>
                 </div>
             </div>
