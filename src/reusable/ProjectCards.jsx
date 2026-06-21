@@ -46,7 +46,7 @@ function ProjectCards({ image, text, title, repoLink, liveLink }) {
                         
                         bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.5)] hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] 
                         
-                        dark:bg-slate-200 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-white dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.9)]"
+                        dark:bg-slate-200 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-white dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.6)]"
                     >
                         Try It Out
                     </Motion.a>
@@ -62,7 +62,7 @@ function ProjectCards({ image, text, title, repoLink, liveLink }) {
                         
                         bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.5)] hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] 
                         
-                        dark:bg-slate-200 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-white dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.9)]"
+                        dark:bg-slate-200 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-white dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.6)]"
                     >
                         Visit Repo
                     </Motion.a>

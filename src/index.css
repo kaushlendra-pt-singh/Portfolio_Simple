@@ -30,6 +30,11 @@
     /* Sky Blue Ripple Colors */
     --ripple-border: rgba(59, 130, 246, 0.3);
     --ripple-fill: rgba(14, 165, 233, 0.4);
+
+    /* ADDED: Light Mode Scrollbar Variables */
+    --scrollbar-track: #e2e8f0;
+    --scrollbar-thumb: #b8bfc9;
+    --scrollbar-thumb-hover: #94a3b8;
   }
 
   /* DARK MODE (The Soft Black Aesthetic) */
@@ -43,8 +48,15 @@
     --primary: #ffffff;
 
     /* Peak Brightness Ripple */
-    --ripple-border: rgba(255, 255, 255,0);
+    --ripple-border: rgba(255, 255, 255, 0);
     --ripple-fill: rgba(0, 0, 0, 1);
+
+    /* ADDED: Dark Mode Scrollbar Variables */
+    --scrollbar-track: #0a0a0a;
+    --scrollbar-thumb: #e2e8f0;
+    /* Crisp Slate-200 */
+    --scrollbar-thumb-hover: #ffffff;
+    /* Peak brightness on hover */
   }
 
   /* Universal CSS */
@@ -57,6 +69,10 @@
   html {
     scroll-behavior: smooth;
     font-size: 115%;
+
+    /* Firefox Fallback for scrollbars */
+    scrollbar-width: auto;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   }
 
   body {
@@ -65,6 +81,32 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Poppins', sans-serif;
+  }
+
+  /* =========================================
+     CUSTOM WEBKIT SCROLLBAR (Chrome/Edge/Safari)
+     ========================================= */
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 100vw;
+    /* Perfect pill shape */
+    /* Keeps the thumb spaced cleanly away from edges */
+    border: 3px solid var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+    /* FIXED: Changes the invisible border matching color to the hover state 
+       so the darker color spans across the full width of the thumb! */
+    border-color: var(--scrollbar-track);
   }
 }
 
