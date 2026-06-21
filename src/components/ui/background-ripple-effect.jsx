@@ -17,15 +17,19 @@ export const BackgroundRippleEffect = ({
         <div
             ref={ref}
             className={cn(
-                "absolute inset-0 h-full w-full",
+                // 1. ADDED `overflow-hidden` here to strictly bound the entire effect to the hero section
+                "absolute inset-0 h-full w-full overflow-hidden",
                 // LIGHT MODE: Subtle sky blues instead of grays
                 "[--cell-border-color:var(--color-sky-200)] [--cell-fill-color:var(--color-sky-50)] [--cell-shadow-color:var(--color-sky-300)]",
                 // DARK MODE: Deep night sky instead of dark grays
                 "dark:[--cell-border-color:var(--color-sky-800)] dark:[--cell-fill-color:var(--color-sky-950)] dark:[--cell-shadow-color:var(--color-sky-900)]"
             )}>
-            <div className="relative h-auto w-auto overflow-hidden">
+
+            {/* 2. CHANGED `h-auto w-auto` to `h-full w-full`. This stops the container from expanding with the oversized grid! */}
+            <div className="relative h-full w-full overflow-hidden">
+
                 <div
-                    className="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
+                    className="pointer-events-none absolute inset-0 z-2 h-full w-full overflow-hidden" />
                 <DivGrid
                     key={`base-${rippleKey}`}
                     className="mask-radial-from-20% mask-radial-at-top opacity-600"
@@ -68,7 +72,7 @@ const DivGrid = ({
     };
 
     return (
-        <div className={cn("relative z-[3]", className)} style={gridStyle}>
+        <div className={cn("relative z-3", className)} style={gridStyle}>
             {cells.map((idx) => {
                 const rowIdx = Math.floor(idx / cols);
                 const colIdx = idx % cols;
