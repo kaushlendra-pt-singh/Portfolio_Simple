@@ -8,12 +8,14 @@ import GenericStand from '../assets/generic_stand_dark.jpg';
 // ─── Micro-components ───────────────────────────────────────────────────────
 
 /** Glowing keyword pill */
-const Highlight = ({ children, color = "sky" }) => {
+export const Highlight = ({ children, color = "sky" }) => {
     const colorMap = {
         sky: "text-sky-400 bg-sky-400/10 border-sky-400/30",
         yellow: "text-yellow-400 bg-yellow-400/10 border-yellow-400/30",
         purple: "text-purple-400 bg-purple-400/10 border-purple-400/30",
         green: "text-green-400 bg-green-400/10 border-green-400/30",
+        red: "text-red-400 bg-red-400/10 border-red-400/30",
+        indigo: "text-blue-400 bg-blue-400/10 border-blue-400/30"
     };
     return (
         <span className={`inline-block px-1.5 py-0.5 rounded border text-sm font-semibold tracking-wide font-mono mx-0.5 ${colorMap[color]}`}>
@@ -27,7 +29,7 @@ const Highlight = ({ children, color = "sky" }) => {
  * Pass align="left" to pin it left-aligned (prevents right-side clipping).
  * Pass align="center" for center (default, can clip on far-left items).
  */
-const Tip = ({ children, tip, align = "right" }) => {
+export const Tip = ({ children, tip, align = "right" }) => {
     const posClass = {
         center: "left-1/2 -translate-x-1/2",
         left: "left-0 translate-x-0",
@@ -54,14 +56,14 @@ const Tip = ({ children, tip, align = "right" }) => {
 };
 
 /** Compact tag row */
-const TagRow = ({ tags, color }) => (
+export const TagRow = ({ tags, color }) => (
     <div className="flex flex-wrap gap-1.5 mt-3">
         {tags.map((t) => <Highlight key={t} color={color}>{t}</Highlight>)}
     </div>
 );
 
 /** Minimal bullet list — each item is a ReactNode */
-const BulletList = ({ items }) => (
+export const BulletList = ({ items }) => (
     <ul className="mt-3 space-y-2">
         {items.map((item, i) => (
             <li key={i} className="flex items-start gap-2 text-base text-aboutForeground">
