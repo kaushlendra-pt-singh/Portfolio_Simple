@@ -120,7 +120,7 @@ const content = [
                     </>,
                     <>Driving impact as an active{" "}
                         <Tip tip="Contributing to open repos, filing PRs, reviewing issues" align="left">
-                            open-source contributor.
+                            open-source contributor
                         </Tip>
                     </>,
                     <>Mastering advanced{" "}
@@ -152,7 +152,7 @@ const content = [
                     <>
                         I obsess over every detail — whether it's a complex{" "}
                         <Highlight color="purple">API routing</Highlight>{" "}bug or the perfect{" "}
-                        <Highlight color="purple">transition timing</Highlight>{" "}in the UI
+                        <Highlight color="purple">transition timing</Highlight>{" "}in the UI.
                     </>,
                 ]} />
             </div>
@@ -176,9 +176,12 @@ const content = [
                             worlds & lore
                         </Tip>
                     </>,
-                    "Catching up on cinematic universes",
-                    <>Following the <Highlight color="green">Cricket</Highlight> seasons closely</>,
-                    "Always hunting the next big challenge — in code and beyond",
+                    <>Catching up on{" "}<Tip tip="Like DC and Mistborn" align="left">
+                        cinematic universes
+                    </Tip>
+                    </>,
+                    <>Following the <Highlight color="green">Cricket</Highlight> seasons closely.</>,
+                    "Always hunting the next big challenge — in code and beyond.",
                 ]} />
             </div>
         ),

@@ -92,8 +92,8 @@ function HeroSection() {
 
                             {/* Point 6: Highlighting your competitive building experience */}
                             <div className="flex flex-col items-center justify-center">
-                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">3+ Hackathons</span>
-                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">Conquered</span>
+                                <span className="font-heading text-lg md:text-xl font-bold text-sky-600 dark:text-slate-100">3+ Official</span>
+                                <span className="font-body text-xs md:text-sm font-light text-foreground/80">Certifications</span>
                             </div>
 
                         </div>
