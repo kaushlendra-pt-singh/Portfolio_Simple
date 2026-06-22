@@ -82,19 +82,18 @@ const content = [
                 <p className="text-base leading-relaxed text-aboutForeground">
                     I'm a{" "}
                     <Tip tip="Building end-to-end: both frontend & backend systems" align="left">
-                        Full Stack
+                        Full Stack Web
                     </Tip>
                     {" & "}
                     <Tip tip="ML pipelines, LLM integration, Agentic AI & deep learning" align="left">
                         AI/ML Engineer
                     </Tip>
-                    {" "}who thrives at the intersection of intelligent systems and immersive web design.
+                    {" "}who believes that security, transparency, and strong principles should always come before code.
                 </p>
                 <p className="text-base leading-relaxed text-aboutForeground mt-3">
-                    I turn complex data and ML architectures into clean, high-performance,
-                    and beautifully interactive products.
+                    I architect secure, scalable backend infrastructure and robust AI/ML pipelines, delivering them through clean, high-performance user interfaces.
                 </p>
-                <TagRow tags={["Full Stack", "AI / ML", "System Design"]} color="yellow" />
+                <TagRow tags={["Full Stack", "AI / ML", "System Design", "DBMS"]} color="yellow" />
             </div>
         ),
         content: (
@@ -108,22 +107,27 @@ const content = [
         description: (
             <div>
                 <p className="text-base leading-relaxed text-aboutForeground">
-                    Bridging heavy backend logic with pixel-perfect frontends.
+                    Bridging complex backend architecture with pixel-perfect frontends, while continuously advancing my expertise in core computer science fundamentals.
                 </p>
                 <BulletList items={[
-                    <>Dynamic UIs with <Highlight color="sky">React</Highlight> & <Highlight color="sky">Next.js</Highlight></>,
-                    <>Scalable backends in <Highlight color="green">Python</Highlight> & <Highlight color="green">Node.js</Highlight></>,
+                    <>Crafting dynamic UIs with <Highlight color="sky">React</Highlight> & <Highlight color="sky">Next.js</Highlight></>,
+                    <>Engineering scalable backends in <Highlight color="green">Python</Highlight> & <Highlight color="green">Node.js</Highlight></>,
                     <>Integrating{" "}
                         <Tip tip="Large Language Models — GPT, Claude, Gemini and more" align="left">
                             LLMs
                         </Tip>
-                        {" "}into real-world products
+                        {" "}into intelligent products using <Highlight color="sky">LangGraph</Highlight>
                     </>,
-                    <>Active{" "}
+                    <>Driving impact as an active{" "}
                         <Tip tip="Contributing to open repos, filing PRs, reviewing issues" align="left">
-                            open-source contributor
+                            open-source contributor.
                         </Tip>
                     </>,
+                    <>Mastering advanced{" "}
+                        <Tip tip="Data Structures and Algorithms" align="left">
+                            DSA
+                        </Tip>{" "}and problem-solving with <Highlight color="green">Java</Highlight>
+                    </>
                 ]} />
             </div>
         ),
@@ -142,8 +146,8 @@ const content = [
                     <br></br>My philosophy:
                 </p>
                 <BulletList items={[
-                    "Clean, maintainable code above all else",
-                    "Resilient infrastructure that never compromises UX",
+                    "Clean, maintainable code above all else.",
+                    "Resilient and robust infrastructure that never compromises security and UX.",
                     // Fixed: no broken mid-sentence JSX split
                     <>
                         I obsess over every detail — whether it's a complex{" "}
@@ -173,7 +177,7 @@ const content = [
                         </Tip>
                     </>,
                     "Catching up on cinematic universes",
-                    <>Following the <Highlight color="green">Cricket</Highlight> season closely</>,
+                    <>Following the <Highlight color="green">Cricket</Highlight> seasons closely</>,
                     "Always hunting the next big challenge — in code and beyond",
                 ]} />
             </div>
