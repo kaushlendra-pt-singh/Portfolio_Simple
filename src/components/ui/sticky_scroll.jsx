@@ -2,11 +2,13 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion as Motion, useMotionValue, animate } from "motion/react";
 import { cn } from "@/lib/utils";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 // Must match the SECTION_IDS order and IDs in App.jsx.
 const SECTION_IDS = ['home', 'about', 'projects', 'contact'];
+const DESKTOP_MQ = '(min-width: 1024px)';
 
-export const StickyScroll = ({ content, contentClassName }) => {
+export const StickyScroll = ({ content, contentClassName, isDesktop: isDesktopProp }) => {
   const [activeCard, setActiveCard] = useState(0);
   const cardLength = content.length;
 
@@ -19,6 +21,23 @@ export const StickyScroll = ({ content, contentClassName }) => {
 
   const EXIT_COOLDOWN = 2200; // ms before we allow another outer-page exit
   const WHEEL_THRESHOLD = 200;  // accumulated deltaY needed to flip a card
+
+  // Track desktop state internally as well (for effects that need it)
+  const [isDesktop, setIsDesktop] = useState(
+    () => isDesktopProp ?? (typeof window !== 'undefined' && window.matchMedia(DESKTOP_MQ).matches)
+  );
+
+  useEffect(() => {
+    if (isDesktopProp !== undefined) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsDesktop(isDesktopProp);
+      return;
+    }
+    const mql = window.matchMedia(DESKTOP_MQ);
+    const onChange = (e) => setIsDesktop(e.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [isDesktopProp]);
 
   // Keep activeCard in sync with the spring value.
   useEffect(() => {
@@ -40,45 +59,39 @@ export const StickyScroll = ({ content, contentClassName }) => {
     });
   }, [progressMV, cardLength]);
 
+  // ── Mobile slide navigation ──────────────────────────────────────────────
+  const goToPrev = useCallback(() => {
+    if (activeCard > 0) goToCard(activeCard - 1);
+  }, [activeCard, goToCard]);
+
+  const goToNext = useCallback(() => {
+    if (activeCard < cardLength - 1) goToCard(activeCard + 1);
+  }, [activeCard, cardLength, goToCard]);
+
+  // ── Desktop-only: Exit to another section ────────────────────────────────
   const exitToSection = useCallback((id) => {
-    // ── The root-cause fix for wobble ────────────────────────────────────
-    //
-    // Old approach: el.scrollIntoView({ behavior: "smooth" })
-    //   → The browser smoothly scrolls the snap container toward the target,
-    //     but snap-mandatory simultaneously fires its own "correction" scroll.
-    //     Two competing animations = visible shake / wobble on neighboring sections.
-    //
-    // New approach: mainEl.scrollTo({ top: exactSnapPoint, behavior: "smooth" })
-    //   → We scroll the snap container DIRECTLY to an exact snap point.
-    //     snap-mandatory has nothing to "correct" because we're already landing
-    //     on the snap point. Single animation, zero fighting, zero wobble.
-    //
+    // Dispatch a custom event on <main> so App.jsx handles the actual scroll.
+    // This ensures a single scroll controller (App.jsx) and no competing scrollTo calls.
     const mainEl = document.querySelector('main');
-    const idx = SECTION_IDS.indexOf(id);
-    if (!mainEl || idx === -1) return;
+    if (!mainEl) return;
 
     lastExitTime.current = Date.now();
     isExiting.current = true;
     wheelAccum.current = 0;
 
-    mainEl.scrollTo({
-      top: idx * mainEl.clientHeight,
-      behavior: 'smooth',
-    });
+    mainEl.dispatchEvent(new CustomEvent('scroll-to-section', {
+      detail: { sectionId: id },
+    }));
 
     // Hold the exit lock until the outer snap scroll fully settles.
-    // App.jsx's own scroll lock (900 ms) also activates from its wheel handler,
-    // but since StickyScroll owns the exit here, we need our own 2400 ms lock
-    // to keep swallowing events from within the About section's div during the
-    // transition (capture phase still routes those events to us, not to App).
     setTimeout(() => { isExiting.current = false; }, 2400);
   }, []);
 
+  // ── Desktop-only: Wheel handler ──────────────────────────────────────────
   const handleWheel = useCallback((e) => {
-    // ── Always prevent default + stop propagation ────────────────────────
-    // This is what keeps the outer snap container deaf to wheel events while
-    // the About section owns the scroll. Combined with { capture: true } below,
-    // stopPropagation() kills the bubble phase so App.jsx's handler never fires.
+    // Always prevent default + stop propagation on desktop
+    // This keeps the outer container deaf to wheel events while
+    // the About section owns the scroll.
     e.preventDefault();
     e.stopPropagation();
 
@@ -109,19 +122,24 @@ export const StickyScroll = ({ content, contentClassName }) => {
 
   const containerRef = useRef(null);
 
+  // Only register wheel interception on desktop
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || !isDesktop) return;
     // capture:true → our handler runs in the capture phase (before bubbling),
     // so we intercept the event before it can reach App.jsx's bubble handler.
     el.addEventListener("wheel", handleWheel, { passive: false, capture: true });
     return () => el.removeEventListener("wheel", handleWheel, { capture: true });
-  }, [handleWheel]);
+  }, [handleWheel, isDesktop]);
 
-  // ── Touch support ────────────────────────────────────────────────────────
+  // ── Touch support (desktop only) ─────────────────────────────────────────
   const touchStartY = useRef(0);
-  const handleTouchStart = (e) => { touchStartY.current = e.touches[0].clientY; };
+  const handleTouchStart = (e) => {
+    if (!isDesktop) return;
+    touchStartY.current = e.touches[0].clientY;
+  };
   const handleTouchEnd = (e) => {
+    if (!isDesktop) return;
     if (isExiting.current) return;
     const delta = touchStartY.current - e.changedTouches[0].clientY;
     if (Math.abs(delta) < 50) return;
@@ -186,7 +204,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
                 </div>
 
                 {/* Clickable dot indicators */}
-                <div className="flex gap-2 mt-8">
+                <div className="flex gap-2 mt-8 items-center">
                   {content.map((_, i) => (
                     <button
                       key={i}
@@ -201,6 +219,38 @@ export const StickyScroll = ({ content, contentClassName }) => {
                     />
                   ))}
                 </div>
+
+                {/* Mobile: Left/Right navigation buttons */}
+                {!isDesktop && (
+                  <div className="flex gap-4 mt-6 lg:hidden">
+                    <button
+                      onClick={goToPrev}
+                      disabled={activeCard === 0}
+                      className={cn(
+                        "flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-300 cursor-pointer",
+                        activeCard === 0
+                          ? "border-foreground/15 text-foreground/20 cursor-not-allowed"
+                          : "border-sky-500/50 dark:border-slate-400/50 text-sky-500 dark:text-slate-300 hover:bg-sky-500/10 dark:hover:bg-slate-300/10 hover:scale-110 active:scale-95 shadow-[0_0_12px_rgba(56,189,248,0.3)] dark:shadow-[0_0_12px_rgba(203,213,225,0.3)]"
+                      )}
+                      aria-label="Previous slide"
+                    >
+                      <IconChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={goToNext}
+                      disabled={activeCard === cardLength - 1}
+                      className={cn(
+                        "flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-300 cursor-pointer",
+                        activeCard === cardLength - 1
+                          ? "border-foreground/15 text-foreground/20 cursor-not-allowed"
+                          : "border-sky-500/50 dark:border-slate-400/50 text-sky-500 dark:text-slate-300 hover:bg-sky-500/10 dark:hover:bg-slate-300/10 hover:scale-110 active:scale-95 shadow-[0_0_12px_rgba(56,189,248,0.3)] dark:shadow-[0_0_12px_rgba(203,213,225,0.3)]"
+                      )}
+                      aria-label="Next slide"
+                    >
+                      <IconChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                )}
               </Motion.div>
             );
           })}

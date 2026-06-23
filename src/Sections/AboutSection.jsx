@@ -197,13 +197,13 @@ const content = [
 
 // ─── Section ─────────────────────────────────────────────────────────────────
 
-export default function AboutSection() {
+export default function AboutSection({ isDesktop }) {
     return (
         <section className="relative h-screen w-full bg-background overflow-hidden">
 
             {/* StickyScroll fills the whole section */}
             <div className="absolute inset-0 z-0 px-4 py-4">
-                <StickyScroll content={content} />
+                <StickyScroll content={content} isDesktop={isDesktop} />
             </div>
 
             {/* Floating title */}
