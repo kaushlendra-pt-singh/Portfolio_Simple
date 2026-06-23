@@ -119,7 +119,7 @@ function App() {
 
       // Use the section's actual offsetTop — this IS the CSS snap point,
       // so re-enabling snap afterwards causes zero correction/wobble.
-      animateScrollTo(container, targetEl.offsetTop, 500, () => {
+      animateScrollTo(container, targetEl.offsetTop, 900, () => {
         // Re-enable CSS snap + scroll-behavior
         container.style.scrollSnapType = '';
         container.style.scrollBehavior = '';
