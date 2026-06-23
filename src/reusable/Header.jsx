@@ -7,7 +7,7 @@ function Header({ links }) {
         <header className='relative flex items-center w-full bg-linear-to-r from-gray-200 via-sky-200 to-gray-200 hover:from-sky-200 hover:via-gray-200 hover:to-sky-200 dark:from-black dark:via-slate-800 dark:to-black dark:hover:from-slate-800 dark:hover:via-black dark:hover:to-slate-800 transition-all duration-500' >
 
             {/* The perfectly centered navigation */}
-            <ul className='flex justify-evenly items-center w-full px-[30%] py-1 text-slate-800 dark:text-slate-200'>
+            <ul className='flex justify-evenly items-center w-full px-[30%] py-1 text-slate-800 dark:text-slate-200 md:text-lg'>
 
                 <li className='ease-in-out transition-all duration-400 list-none hover:bg-sky-200 dark:hover:bg-slate-800 rounded-2xl overflow-hidden'>
                     {/* FIXED: Added 'block p-2' to the <a> tag so the entire hover area is clickable */}

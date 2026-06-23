@@ -47,7 +47,7 @@ export default function ThemeToggle() {
                 transition={{ duration: 0.2 }}
                 className="absolute"
             >
-                <IconSun className="h-5 w-5" />
+                <IconMoon className="h-5 w-5" />
             </motion.div>
 
             <motion.div
@@ -56,7 +56,7 @@ export default function ThemeToggle() {
                 transition={{ duration: 0.2 }}
                 className="absolute"
             >
-                <IconMoon className="h-5 w-5" />
+                <IconSun className="h-5 w-5" />
             </motion.div>
         </button>
     );
