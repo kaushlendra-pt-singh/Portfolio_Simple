@@ -106,15 +106,15 @@ function App() {
           </div>
         </section>
 
-        <section id='about' className='snap-start'>
+        <section id='about' className='snap-start lg:h-screen'>
           <AboutSection />
         </section>
 
-        <section id='projects' className='snap-start'>
+        <section id='projects' className='snap-start lg:h-screen'>
           <ProjectsSection />
         </section>
 
-        <section id='contact' className='snap-start'>
+        <section id='contact' className='snap-start lg:h-screen'>
           <ContactSection />
         </section>
       </main>

@@ -79,7 +79,7 @@ function ProjectsSection() {
                 </div>
             </div>
 
-            <div className="shrink-0 flex justify-center mt-2">
+            <div className="shrink-0 flex justify-center mt-4">
                 <Motion.a
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
