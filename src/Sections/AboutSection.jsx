@@ -221,7 +221,7 @@ export default function AboutSection({ isDesktop }) {
             </div>
 
             {/* Resume CTA */}
-            <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center pointer-events-none">
+            <div className="absolute bottom-8 left-0 right-0 z-20 flex gap-15 justify-center pointer-events-none">
                 <Motion.a
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -229,9 +229,20 @@ export default function AboutSection({ isDesktop }) {
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pointer-events-auto rounded-full bg-sky-500 px-8 py-3 font-body font-medium text-white shadow-[0_0_20px_rgba(56,189,248,0.6)] transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] dark:hover:bg-slate-200 dark:hover:shadow-[0_0_40px_rgba(203,213,225,0.7)]"
+                    className="pointer-events-auto rounded-full bg-sky-500 px-8 py-3 font-body font-medium text-white shadow-[0_0_20px_rgba(56,189,248,0.6)] transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] dark:hover:bg-slate-200 dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.6)]"
                 >
                     Download Resume
+                </Motion.a>
+                <Motion.a
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pointer-events-auto hidden md:inline rounded-full bg-sky-500 px-8 py-3 font-body font-medium text-white shadow-[0_0_20px_rgba(56,189,248,0.6)] transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] dark:hover:bg-slate-200 dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.6)]"
+                >
+                    More About Me
                 </Motion.a>
             </div>
         </section>

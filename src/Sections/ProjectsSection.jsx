@@ -79,7 +79,7 @@ function ProjectsSection() {
                 </div>
             </div>
 
-            <div className="shrink-0 flex justify-center mb-5">
+            <div className="shrink-0 flex justify-center mb-5 gap-15">
                 <Motion.a
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -88,9 +88,21 @@ function ProjectsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     // The Ultimate Silver Button classes:
-                    className="rounded-full bg-sky-500 dark:bg-slate-200/90 text-white dark:text-slate-900 px-8 py-3 font-body font-medium shadow-[0_0_20px_rgba(56,189,248,0.6)] dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] transition-all hover:scale-105 hover:bg-sky-400 dark:hover:bg-slate-200 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:hover:shadow-[0_0_40px_rgba(203,213,225,0.7)]"
+                    className="rounded-full bg-sky-500 dark:bg-slate-200/90 text-white dark:text-slate-900 px-8 py-3 font-body font-medium shadow-[0_0_20px_rgba(56,189,248,0.6)] dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] transition-all hover:scale-105 hover:bg-sky-400 dark:hover:bg-slate-200 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.6)]"
                 >
                     Visit GitHub
+                </Motion.a>
+                <Motion.a
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+                    href='https://github.com/kaushlendra-pt-singh'
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    // The Ultimate Silver Button classes:
+                    className="rounded-full hidden md:inline bg-sky-500 dark:bg-slate-200/90 text-white dark:text-slate-900 px-8 py-3 font-body font-medium shadow-[0_0_20px_rgba(56,189,248,0.6)] dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] transition-all hover:scale-105 hover:bg-sky-400 dark:hover:bg-slate-200 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.6)]"
+                >
+                    More Projects
                 </Motion.a>
             </div>
 

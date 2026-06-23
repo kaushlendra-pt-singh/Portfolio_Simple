@@ -138,7 +138,7 @@ export default function ContactSection() {
                             ref={formRef}
                             onSubmit={sendEmail}
                             // Form max-width tightened to max-w-md, gap reduced to gap-4, padding to p-6
-                            className='flex w-full h-full max-w-md flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white/50 p-5 shadow-[0_0_40px_rgba(56,189,248,0.4)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_40px_rgba(150,150,150,0.4)]'
+                            className='flex w-full h-full max-w-md flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white/50 p-5 shadow-[0_0_40px_rgba(56,189,248,0.4)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_30px_rgba(150,150,150,0.4)]'
                         >
                             {/* Time stamp */}
                             <input type="hidden" name="time" value={new Date().toLocaleString()} />
@@ -190,7 +190,7 @@ export default function ContactSection() {
                                 bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.5)] hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] 
                                 
                                 /* DARK MODE: Explicit bright white background and pure white peak-brightness glow */
-                                dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-slate-100/80 dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.4)]"
+                                dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_15px_rgba(255,255,255,0.4)] dark:hover:bg-slate-100/80 dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                             >
                                 {status}
                             </button>

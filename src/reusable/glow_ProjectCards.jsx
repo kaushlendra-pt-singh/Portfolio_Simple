@@ -13,7 +13,7 @@ function GlowProjectCards({ image, text, title, repoLink, liveLink, tags, stats,
             <GlowingEffect disabled={false} spread={30} glow={true} borderWidth={2} proximity={30} className={'rounded-2xl'} inactivezone={0.1} />
 
             {/* Micro-adjustment: p-3 -> p-2.5, gap-2 -> gap-1.5 */}
-            <div className="relative z-10 flex flex-col h-full w-full rounded-2xl border border-slate-200/80 bg-white/50 p-2.5 gap-1.5 shadow-[0_0_40px_rgba(56,189,248,0.5)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_40px_rgba(150,150,150,0.3)] group">
+            <div className="relative z-10 flex flex-col h-full w-full rounded-2xl border border-slate-200/80 bg-white/50 p-2.5 gap-1.5 shadow-[0_0_40px_rgba(56,189,248,0.5)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_30px_rgba(150,150,150,0.3)] group">
 
                 {/* Micro-adjustment: Title scales down to text-base on mobile, stays text-lg on desktop */}
                 <h1 className="text-base md:text-xl text-center font-heading font-bold text-slate-800 dark:text-slate-100 truncate w-full p-3">
@@ -55,7 +55,7 @@ function GlowProjectCards({ image, text, title, repoLink, liveLink, tags, stats,
                             href={liveLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 text-center rounded-full px-3 py-1.5 font-body text-base font-medium transition-all hover:scale-105 bg-sky-500 text-white shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:shadow-[0_0_30px_rgba(56,189,248,0.7)] hover:bg-sky-400 dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_10px_rgba(150,180,180,0.6)] dark:hover:bg-slate-100/80 dark:hover:shadow-[0_0_40px_rgba(203,213,225,0.4)]"
+                            className="flex-1 text-center rounded-full px-3 py-1.5 font-body text-base font-medium transition-all hover:scale-105 bg-sky-500 text-white shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:shadow-[0_0_30px_rgba(56,189,248,0.7)] hover:bg-sky-400 dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_10px_rgba(150,180,180,0.6)] dark:hover:bg-slate-100/80 dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.4)]"
                         >
                             Try It Out
                         </Motion.a>
