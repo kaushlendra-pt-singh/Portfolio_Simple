@@ -13,7 +13,7 @@ function ProjectsSection() {
             title: 'NLP Sentiment Analysis',
             text: 'Analyze deep sentiment of texts with high-speed LLM cloud services.',
             image: NLP,
-            tags: ["Pyhton", "FastAPI", "Groq", "Gemini", "Mistral", "AWS", "Azure"],
+            tags: ["Pyhton", "Groq", "Gemini", "AWS", "Azure"],
             stats: [
                 <>Analyzed more than 120 text paragraphs.</>,
                 <>Increased retrieval speed by <Highlight color='red'>82%</Highlight> using <Highlight color='red'>Redis</Highlight> compared to MongoDB.</>,
@@ -79,7 +79,7 @@ function ProjectsSection() {
                 </div>
             </div>
 
-            <div className="shrink-0 flex justify-center -mt-2">
+            <div className="shrink-0 flex justify-center">
                 <Motion.a
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
