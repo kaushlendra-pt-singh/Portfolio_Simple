@@ -57,14 +57,14 @@ function GlowProjectCards({ image, text, title, repoLink, liveLink, tags, stats,
                             href={liveLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 text-center rounded-full px-3 py-1.5 font-body text-xs font-medium transition-all hover:scale-105 bg-sky-500 text-white shadow-[0_0_10px_rgba(56,189,248,0.5)] hover:bg-sky-400 dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_10px_rgba(150,180,180,0.6)] dark:hover:bg-slate-100/80 dark:hover:shadow-[0_0_40px_rgba(203,213,225,0.4)]"
+                            className="flex-1 text-center rounded-full px-3 py-1.5 font-body text-xs font-medium transition-all hover:scale-105 bg-sky-500 text-white shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:shadow-[0_0_30px_rgba(56,189,248,0.7)] hover:bg-sky-400 dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_10px_rgba(150,180,180,0.6)] dark:hover:bg-slate-100/80 dark:hover:shadow-[0_0_40px_rgba(203,213,225,0.4)]"
                         >
                             Try It Out
                         </Motion.a>
                     ) : (
                         <Link
                             to="/coming-soon"
-                            className="flex-1 text-center rounded-full px-3 py-1.5 font-body text-xs font-medium transition-all hover:scale-105 bg-surface text-foreground border border-border hover:bg-sky-200/50 dark:hover:bg-slate-800"
+                            className="flex-1 text-center rounded-full px-3 py-1.5 font-body text-xs font-medium transition-all hover:scale-105 bg-surface text-foreground border border-border hover:bg-gray-200 dark:hover:bg-slate-800"
                         >
                             Coming Soon
                         </Link>
