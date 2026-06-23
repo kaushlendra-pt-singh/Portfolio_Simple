@@ -8,47 +8,45 @@ function GlowProjectCards({ image, text, title, repoLink, liveLink, tags, stats,
     const hasLiveLink = liveLink && liveLink.trim() !== '';
 
     return (
-        /* 1. OUTER WRAPPER: Must be relative so the GlowingEffect tracks it. 
-           Crucially, NO overflow-hidden here, so the glow can breathe outwards! */
         <div className="relative flex w-full h-full">
 
-            {/* 2. THE GLOW: Exact same props (spread, proximity, rounded-2xl) as ContactSection */}
             <GlowingEffect disabled={false} spread={30} glow={true} borderWidth={2} proximity={30} className={'rounded-2xl'} inactivezone={0.1} />
 
-            {/* 3. THE CARD: Exact same glassmorphism, shadows, and borders as your Contact Form */}
-            <div className="relative z-10 flex flex-col h-full w-full rounded-2xl border border-slate-200/80 bg-white/50 p-3 gap-2 shadow-[0_0_40px_rgba(56,189,248,0.5)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_40px_rgba(150,150,150,0.3)] group">
+            {/* Micro-adjustment: p-3 -> p-2.5, gap-2 -> gap-1.5 */}
+            <div className="relative z-10 flex flex-col h-full w-full rounded-2xl border border-slate-200/80 bg-white/50 p-2.5 gap-1.5 shadow-[0_0_40px_rgba(56,189,248,0.5)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_40px_rgba(150,150,150,0.3)] group">
 
-                {/* Row 1: Title (Small, Bold, 1-Line Truncated) */}
-                <h1 className="text-lg text-center font-heading font-bold text-slate-800 dark:text-slate-100 truncate w-full">
+                {/* Micro-adjustment: Title scales down to text-base on mobile, stays text-lg on desktop */}
+                <h1 className="text-base md:text-lg text-center font-heading font-bold text-slate-800 dark:text-slate-100 truncate w-full">
                     {title}
                 </h1>
 
-                {/* Row 2: Image (Left) + Desc (Right) */}
-                <div className="flex flex-row items-start gap-3 w-full">
-                    <div className="w-20 h-20 md:w-24 md:h-24 shrink-0 overflow-hidden rounded-lg border border-border">
+                {/* Micro-adjustment: gap-3 -> gap-2.5 */}
+                <div className="flex flex-row items-start gap-2.5 w-full">
+                    {/* Micro-adjustment: w-20/h-20 -> w-16/h-16. Desktop w-24/h-24 -> w-20/h-20 */}
+                    <div className="w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden rounded-lg border border-border">
                         <img
                             src={image}
                             alt="Project"
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                     </div>
-                    <p className="text-base font-body font-light text-foreground/80 leading-tight line-clamp-4">
+                    {/* Micro-adjustment: text-base -> text-sm, line-clamp-4 -> line-clamp-3 */}
+                    <p className="text-sm font-body font-light text-foreground/80 leading-tight line-clamp-3">
                         {text}
                     </p>
                 </div>
 
-                {/* Row 3: Tags (Scaled down to fit tightly) */}
-                <div className="w-full scale-95 origin-left -my-1">
+                {/* Micro-adjustment: Tighter negative margin to pull tags up slightly */}
+                <div className="w-full scale-95 origin-left -my-1.5">
                     <TagRow tags={tags} color={tagColor} />
                 </div>
 
-                {/* Row 4: Stats (Bullet Points scaled down) */}
                 <div className="flex-1 text-xs w-full">
                     <BulletList items={stats} />
                 </div>
 
-                {/* Row 5: Action Buttons (Smaller padding and fonts) */}
-                <div className="mt-auto pt-1 flex flex-row gap-2 w-full">
+                {/* Micro-adjustment: Removed pt-1 to tighten the gap above buttons */}
+                <div className="mt-auto flex flex-row gap-2 w-full">
                     {hasLiveLink ? (
                         <Motion.a
                             initial={{ opacity: 0, y: 5 }}
