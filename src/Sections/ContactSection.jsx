@@ -105,18 +105,18 @@ export default function ContactSection() {
                         className="flex flex-col justify-center space-y-3"
                     >
                         {/* 1. TEXT SCALED DOWN: Now text-2xl to 3xl */}
-                        <h2 className="text-2xl lg:text-3xl font-heading font-bold text-foreground leading-tight">
+                        <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground leading-tight">
                             Let's build <br />
                             <span className="text-sky-500 dark:text-slate-50! dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]">something together.</span>
                         </h2>
 
                         {/* 2. TEXT SCALED DOWN: Now text-sm to match the smaller form */}
-                        <p className="text-base font-body text-foreground/70 max-w-sm leading-relaxed">
+                        <p className="text-base md:text-lg font-body text-foreground/80 max-w-sm leading-relaxed">
                             Want to collaborate or have a question? Drop a message below and I'll try to connect as soon as possible.
                         </p>
 
                         {/* 3. DOCK WRAPPER: This forces the FloatingDock to behave inside the flex column */}
-                        <div className="pt-4 mt-6 relative z-10 flex w-full justify-start">
+                        <div className="pt-4 mt-8 relative z-10 flex w-full justify-start">
                             <FloatingDock
                                 items={items}
                                 // ml-0 and mr-auto overrides Aceternity's default mx-auto, forcing it to align left with your text!
@@ -138,7 +138,7 @@ export default function ContactSection() {
                             ref={formRef}
                             onSubmit={sendEmail}
                             // Form max-width tightened to max-w-md, gap reduced to gap-4, padding to p-6
-                            className='flex w-full max-w-md flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white/50 p-5 shadow-[0_0_40px_rgba(56,189,248,0.4)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_40px_rgba(150,150,150,0.4)]'
+                            className='flex w-full h-full max-w-md flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white/50 p-5 shadow-[0_0_40px_rgba(56,189,248,0.4)] backdrop-blur-md transition-all dark:border-slate-700/50 dark:bg-slate-900/50 dark:shadow-[0_0_40px_rgba(150,150,150,0.4)]'
                         >
                             {/* Time stamp */}
                             <input type="hidden" name="time" value={new Date().toLocaleString()} />
@@ -184,7 +184,7 @@ export default function ContactSection() {
                                 type="submit"
                                 disabled={status === 'Sending...'}
                                 // Padding reduced to py-2.5
-                                className="cursor-pointer mt-1 w-full rounded-full px-8 py-2.5 font-body text-sm font-medium transition-all hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 
+                                className="cursor-pointer mt-1 w-full rounded-full px-8 py-2.5 font-body text-sm md:text-base font-medium transition-all hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 
                                 
                                 /* LIGHT MODE: Explicit blue background and blue glow */
                                 bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.5)] hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] 

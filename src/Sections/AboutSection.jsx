@@ -18,7 +18,7 @@ export const Highlight = ({ children, color = "sky" }) => {
         indigo: "text-blue-400 bg-blue-400/10 border-blue-400/30"
     };
     return (
-        <span className={`inline-block px-1.5 py-0.5 rounded border text-sm font-semibold tracking-wide font-mono mx-0.5 ${colorMap[color]}`}>
+        <span className={`inline-block px-1.5 py-0.5 rounded border text-base font-semibold tracking-wide font-mono mx-0.5 ${colorMap[color]}`}>
             {children}
         </span>
     );
@@ -81,7 +81,7 @@ const content = [
         title: 'Professional Me',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-aboutForeground">
+                <p className="text-lg leading-relaxed text-aboutForeground">
                     I'm a{" "}
                     <Tip tip="Building end-to-end: both frontend & backend systems" align="left">
                         Full Stack Web
@@ -92,7 +92,7 @@ const content = [
                     </Tip>
                     {" "}who believes that security, transparency, and strong principles should always come before code.
                 </p>
-                <p className="text-base leading-relaxed text-aboutForeground mt-3">
+                <p className="text-lg leading-relaxed text-aboutForeground mt-3">
                     I architect secure, scalable backend infrastructure and robust AI/ML pipelines, delivering them through clean, high-performance user interfaces.
                 </p>
                 <TagRow tags={["Full Stack", "AI / ML", "System Design", "DBMS"]} color="yellow" />
@@ -108,7 +108,7 @@ const content = [
         title: 'Present',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-aboutForeground">
+                <p className="text-lg leading-relaxed text-aboutForeground">
                     Bridging complex backend architecture with pixel-perfect frontends, while continuously advancing my expertise in core computer science fundamentals.
                 </p>
                 <BulletList items={[
@@ -143,7 +143,7 @@ const content = [
         title: 'My Way',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-aboutForeground">
+                <p className="text-lg leading-relaxed text-aboutForeground">
                     Great software shouldn't just <em>function</em> — it should feel <em>effortless</em>.
                     <br></br>My philosophy:
                 </p>
@@ -169,7 +169,7 @@ const content = [
         title: 'Beyond the Code',
         description: (
             <div>
-                <p className="text-base leading-relaxed text-aboutForeground">
+                <p className="text-lg leading-relaxed text-aboutForeground">
                     When I'm not shipping features, you'll find me:
                 </p>
                 <BulletList items={[

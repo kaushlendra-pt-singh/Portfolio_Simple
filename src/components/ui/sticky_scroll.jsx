@@ -149,7 +149,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
       className="relative h-full flex w-full justify-between rounded-md px-10 md:px-20 bg-transparent overflow-hidden"
     >
       {/* LEFT: Stacked text cards animated by spring */}
-      <div className="relative flex items-start w-full lg:w-1/2 pr-8 md:pr-16 overflow-hidden">
+      <div className="relative flex items-start w-full lg:w-1/2 pr-8 md:pr-16 overflow-hidden md:pl-10">
         <div className="w-full h-full relative">
           {content.map((item, index) => {
             const diff = index - activeCard;

@@ -19,18 +19,18 @@ function HeroSection() {
             />
 
             <div className='flex flex-5 w-full h-[70%] items-center'>
-                <div className='ml-6 inline-block pl-10 flex-1 h-full justify-evenly leading-2 relative'>
+                <div className='inline-block pl-30 flex-1 h-full justify-evenly leading-2 relative'>
                     <p className='text-3xl mb-2.5 pl-1 mt-1 font-medium'>Hello, I'm</p>
 
-                    <p className='text-7xl mr-2 font-heading bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-300 bg-clip-text text-transparent drop-shadow-sm'>
+                    <p className='text-7xl mr-2 font-semibold bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-300 bg-clip-text text-transparent drop-shadow-sm'>
                         KAUSHLENDRA
                     </p>
-                    <p className='text-6xl mt-2.5 font-heading bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-300 bg-clip-text text-transparent drop-shadow-sm'>
+                    <p className='text-6xl mt-2.5 font-semibold bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-100 bg-clip-text text-transparent drop-shadow-sm'>
                         PRATAP SINGH
                     </p>
 
                     <p className='mt-5.5 inline-block text-2xl ml-1 font-medium'>I am a </p>
-                    <FlipWords words={words} className={'text-sky-500! dark:text-slate-50! dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)] text-3xl'} />
+                    <FlipWords words={words} className={'text-sky-500! dark:text-slate-50! dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] text-3xl'} />
                 </div>
 
                 <div className='flex-1 h-full place-items-center flex justify-center'>

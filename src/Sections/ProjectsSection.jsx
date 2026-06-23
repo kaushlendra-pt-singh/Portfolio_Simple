@@ -70,7 +70,7 @@ function ProjectsSection() {
             </Motion.h1>
 
             <div className="flex w-full flex-1 items-center justify-center min-h-0 my-4">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl px-2 md:px-6 h-full pb-2">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-[95%] px-2 md:px-6 h-full pb-2">
                     {content.map((elem) => (
                         <div key={elem.id} className="flex justify-center h-full w-full">
                             <GlowProjectCards image={elem.image} text={elem.text} title={elem.title} repoLink={elem.repoLink} liveLink={elem.liveLink} stats={elem.stats} tagColor={elem.tagColor} tags={elem.tags} />
@@ -79,7 +79,7 @@ function ProjectsSection() {
                 </div>
             </div>
 
-            <div className="shrink-0 flex justify-center mt-4">
+            <div className="shrink-0 flex justify-center mb-5">
                 <Motion.a
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
