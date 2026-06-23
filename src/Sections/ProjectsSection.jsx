@@ -57,7 +57,7 @@ function ProjectsSection() {
     ]
 
     return (
-        <section className='flex h-screen w-full flex-col bg-background px-4 py-6 overflow-hidden'>
+        <section className='flex h-full w-full flex-col bg-background px-4 py-6 overflow-hidden'>
 
             {/* Added dynamic dark mode drop shadow to the title */}
             <Motion.h1
@@ -79,7 +79,7 @@ function ProjectsSection() {
                 </div>
             </div>
 
-            <div className="shrink-0 flex justify-center -mb-2">
+            <div className="shrink-0 flex justify-center -mt-2">
                 <Motion.a
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
