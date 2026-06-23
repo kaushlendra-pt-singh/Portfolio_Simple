@@ -57,7 +57,7 @@ function ProjectsSection() {
     ]
 
     return (
-        <section className='flex h-full w-full flex-col bg-background px-4 py-6 overflow-hidden'>
+        <section className='flex h-full w-full flex-col bg-background px-4 py-6'>
 
             {/* Added dynamic dark mode drop shadow to the title */}
             <Motion.h1

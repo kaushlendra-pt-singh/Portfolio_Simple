@@ -8,7 +8,7 @@ function GlowProjectCards({ image, text, title, repoLink, liveLink, tags, stats,
     const hasLiveLink = liveLink && liveLink.trim() !== '';
 
     return (
-        <div className="relative flex w-full h-[90%]">
+        <div className="relative flex w-full h-full">
 
             <GlowingEffect disabled={false} spread={30} glow={true} borderWidth={2} proximity={30} className={'rounded-2xl'} inactivezone={0.1} />
 

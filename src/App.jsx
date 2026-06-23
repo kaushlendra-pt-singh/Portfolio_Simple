@@ -99,22 +99,22 @@ function App() {
         <BackToTop containerRef={containerRef} />
         {/* <FloatingNav containerRef={containerRef} navItems={navItems} /> */}
 
-        <section id='home' className='snap-start flex flex-col bg-background h-screen w-full overflow-hidden'>
+        <section id='home' className='snap-start flex flex-col bg-background h-screen w-full'>
           <Header links={links} />
           <div className='flex-1 w-full overflow-y-auto'>
             <HeroSection />
           </div>
         </section>
 
-        <section id='about' className='snap-start lg:h-screen'>
+        <section id='about' className='snap-start h-screen'>
           <AboutSection />
         </section>
 
-        <section id='projects' className='snap-start lg:h-screen'>
+        <section id='projects' className='snap-start h-screen'>
           <ProjectsSection />
         </section>
 
-        <section id='contact' className='snap-start lg:h-screen'>
+        <section id='contact' className='snap-start h-screen'>
           <ContactSection />
         </section>
       </main>

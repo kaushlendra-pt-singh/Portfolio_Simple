@@ -68,7 +68,6 @@
 
   html {
     scroll-behavior: smooth;
-    font-size: 115%;
 
     /* Firefox Fallback for scrollbars */
     scrollbar-width: auto;

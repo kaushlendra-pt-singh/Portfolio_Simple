@@ -79,7 +79,7 @@ export default function ContactSection() {
 
     return (
         // 1. STRICT h-screen wrapper
-        <section className='flex h-screen w-full flex-col bg-background pt-6 overflow-hidden'>
+        <section className='flex h-full w-full flex-col bg-background pt-6'>
 
             {/* 2. TOP HEADER: Removed the massive bottom margins so it doesn't push the form down */}
             <Motion.h1

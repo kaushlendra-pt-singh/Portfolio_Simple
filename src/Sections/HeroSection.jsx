@@ -53,7 +53,7 @@ function HeroSection() {
                     <WobbleCard
                         // 1. Changed bg-background to dark:bg-[#0c0c0c] for that deep, smooth black.
                         // 2. Added a two-part shadow: A brighter inset shadow + a subtle outer glow [0_0_15px_rgba(...)]
-                        containerClassName="max-w-4xl w-full bg-background dark:bg-[#0c0c0c] border-sky-500 dark:border-slate-300 border-[1.5px] rounded-2xl min-h-0 h-[150px] shadow-[inset_0_0_40px_rgba(14,165,233,0.5)] dark:shadow-[inset_0_0_50px_rgba(255,255,255,0.4),0_0_15px_rgba(255,255,255,0.15)]"
+                        containerClassName="max-w-4xl w-full bg-background dark:bg-[#0c0c0c] border-sky-500 dark:border-slate-300 border-[1.5px] rounded-2xl min-h-[150px] h-auto shadow-[inset_0_0_40px_rgba(14,165,233,0.5)] dark:shadow-[inset_0_0_50px_rgba(255,255,255,0.4),0_0_15px_rgba(255,255,255,0.15)]"
                         className="flex h-full w-full flex-col items-center justify-center p-6"
                     >
                         {/* Slightly boosted the text drop-shadow to match the new border intensity */}
