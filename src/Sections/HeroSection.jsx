@@ -44,7 +44,7 @@ function HeroSection({ isDesktop }) {
     );
 
     return (
-        <hero className='flex pt-[4%] w-full flex-col h-full justify-between relative'>
+        <section className='flex pt-[4%] w-full flex-col h-full justify-between relative overflow-x-hidden'>
             <BackgroundRippleEffect
                 rows={isDesktop ? 10 : 6}
                 cols={isDesktop ? 23 : 8}
@@ -111,7 +111,7 @@ function HeroSection({ isDesktop }) {
                     </div>
                 </div>
             </div>
-        </hero>
+        </section>
     )
 }
 
