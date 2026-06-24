@@ -45,7 +45,7 @@ function GlowProjectCards({ image, text, title, repoLink, liveLink, tags, stats,
                     <BulletList items={stats} />
                 </div>
 
-                <div className="mt-auto flex flex-row gap-2 w-full">
+                <div className="mt-auto flex flex-row gap-2 w-full items-center">
                     {hasLiveLink ? (
                         <Motion.a
                             initial={{ opacity: 0, y: 5 }}
