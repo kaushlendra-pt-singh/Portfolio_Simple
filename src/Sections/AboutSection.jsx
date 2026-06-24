@@ -1,5 +1,7 @@
-import { motion as Motion } from "motion/react";
+import { useState, useCallback } from "react";
+import { motion as Motion, AnimatePresence } from "motion/react";
 import { StickyScroll } from "../components/ui/sticky_scroll.jsx";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import LapMan from '../assets/man_on_laptop.jpg';
 import MachinArch from '../assets/Coding_Blue.jpg';
 import CodingLap from '../assets/My_Way_Better.jpg';
@@ -81,7 +83,7 @@ const content = [
         title: 'Professional Me',
         description: (
             <div>
-                <p className="text-lg leading-relaxed text-aboutForeground">
+                <p className="text-base lg:text-lg leading-relaxed text-aboutForeground">
                     I'm a{" "}
                     <Tip tip="Building end-to-end: both frontend & backend systems" align="left">
                         Full Stack Web
@@ -92,23 +94,19 @@ const content = [
                     </Tip>
                     {" "}who believes that security, transparency, and strong principles should always come before code.
                 </p>
-                <p className="text-lg leading-relaxed text-aboutForeground mt-3">
+                <p className="text-base lg:text-lg leading-relaxed text-aboutForeground mt-3">
                     I architect secure, scalable backend infrastructure and robust AI/ML pipelines, delivering them through clean, high-performance user interfaces.
                 </p>
                 <TagRow tags={["Full Stack", "AI / ML", "System Design", "DBMS"]} color="yellow" />
             </div>
         ),
-        content: (
-            <div>
-                <img src={LapMan} alt="Professional" className="w-100 rounded-xl shadow-2xl object-cover" />
-            </div>
-        ),
+        image: LapMan,
     },
     {
         title: 'Present',
         description: (
             <div>
-                <p className="text-lg leading-relaxed text-aboutForeground">
+                <p className="text-base lg:text-lg leading-relaxed text-aboutForeground">
                     Bridging complex backend architecture with pixel-perfect frontends, while continuously advancing my expertise in core computer science fundamentals.
                 </p>
                 <BulletList items={[
@@ -129,28 +127,23 @@ const content = [
                         <Tip tip="Data Structures and Algorithms" align="left">
                             DSA
                         </Tip>{" "}and problem-solving with <Highlight color="green">Java</Highlight>
-                    </>
+                    </>,
                 ]} />
             </div>
         ),
-        content: (
-            <div>
-                <img src={MachinArch} alt="Current work" className="w-100 rounded-xl shadow-2xl object-cover" />
-            </div>
-        ),
+        image: MachinArch,
     },
     {
         title: 'My Way',
         description: (
             <div>
-                <p className="text-lg leading-relaxed text-aboutForeground">
+                <p className="text-base lg:text-lg leading-relaxed text-aboutForeground">
                     Great software shouldn't just <em>function</em> — it should feel <em>effortless</em>.
                     <br></br>My philosophy:
                 </p>
                 <BulletList items={[
                     "Clean, maintainable code above all else.",
                     "Resilient and robust infrastructure that never compromises security and UX.",
-                    // Fixed: no broken mid-sentence JSX split
                     <>
                         I obsess over every detail — whether it's a complex{" "}
                         <Highlight color="purple">API routing</Highlight>{" "}bug or the perfect{" "}
@@ -159,17 +152,13 @@ const content = [
                 ]} />
             </div>
         ),
-        content: (
-            <div>
-                <img src={CodingLap} alt="My approach" className="w-100 rounded-xl shadow-2xl object-cover" />
-            </div>
-        ),
+        image: CodingLap,
     },
     {
         title: 'Beyond the Code',
         description: (
             <div>
-                <p className="text-lg leading-relaxed text-aboutForeground">
+                <p className="text-base lg:text-lg leading-relaxed text-aboutForeground">
                     When I'm not shipping features, you'll find me:
                 </p>
                 <BulletList items={[
@@ -187,23 +176,209 @@ const content = [
                 ]} />
             </div>
         ),
-        content: (
-            <div>
-                <img src={GenericStand} alt="Beyond work" className="w-100 h-auto rounded-xl shadow-2xl object-cover" />
-            </div>
-        ),
+        image: GenericStand,
     },
 ];
+
+// Build the `content` prop shape that StickyScroll expects (with .content as JSX)
+const stickyScrollContent = content.map(item => ({
+    ...item,
+    content: (
+        <div>
+            <img src={item.image} alt={item.title} className="w-100 rounded-xl shadow-2xl object-cover" />
+        </div>
+    ),
+}));
+
+// ─── Mobile About — 3D Carousel ──────────────────────────────────────────────
+
+// Variants for the 3D carousel-like page turn animation
+const slideVariants = {
+    enter: (direction) => ({
+        rotateY: direction > 0 ? 45 : -45,
+        x: direction > 0 ? '60%' : '-60%',
+        opacity: 0,
+        scale: 0.85,
+    }),
+    center: {
+        rotateY: 0,
+        x: 0,
+        opacity: 1,
+        scale: 1,
+    },
+    exit: (direction) => ({
+        rotateY: direction > 0 ? -45 : 45,
+        x: direction > 0 ? '-60%' : '60%',
+        opacity: 0,
+        scale: 0.85,
+    }),
+};
+
+function MobileAbout() {
+    const [activeCard, setActiveCard] = useState(0);
+    const [direction, setDirection] = useState(0);
+
+    const goToPrev = useCallback(() => {
+        if (activeCard > 0) {
+            setDirection(-1);
+            setActiveCard(prev => prev - 1);
+        }
+    }, [activeCard]);
+
+    const goToNext = useCallback(() => {
+        if (activeCard < content.length - 1) {
+            setDirection(1);
+            setActiveCard(prev => prev + 1);
+        }
+    }, [activeCard]);
+
+    const item = content[activeCard];
+
+    const shadowColors = [
+        "rgba(250, 204, 21, 0.4)",
+        "rgba(56, 189, 248, 0.4)",
+        "rgba(127, 0, 255, 0.4)",
+        "rgba(74, 222, 128, 0.4)",
+    ];
+
+    return (
+        <section className="w-full bg-background px-4 py-8">
+            {/* Title */}
+            <Motion.h1
+                initial={{ opacity: 0.5, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.6, ease: "easeInOut" }}
+                className="text-center mb-6"
+            >
+                <span className="bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 bg-clip-text text-3xl font-bold font-heading tracking-tight text-transparent drop-shadow-[0_0_30px_rgba(56,189,248,0.5)] dark:drop-shadow-[0_0_30px_rgba(150,150,150,0.5)]">
+                    ABOUT ME
+                </span>
+            </Motion.h1>
+
+            {/* Carousel container */}
+            <div className="relative w-full" style={{ perspective: '1200px' }}>
+                <AnimatePresence mode="wait" custom={direction}>
+                    <Motion.div
+                        key={activeCard}
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30,
+                            mass: 0.8,
+                        }}
+                        className="w-full rounded-2xl border border-slate-200/60 bg-white/50 dark:border-slate-700/40 dark:bg-slate-900/40 backdrop-blur-sm p-5 origin-center"
+                        style={{ transformStyle: 'preserve-3d' }}
+                    >
+                        {/* Card title */}
+                        <h2 className="text-2xl font-bold text-foreground font-heading text-center mb-4">
+                            {item.title}
+                        </h2>
+
+                        {/* Card image */}
+                        <div className="w-full flex justify-center mb-5">
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                className="w-full max-w-xs rounded-xl object-cover"
+                                style={{ boxShadow: `0 8px 32px ${shadowColors[activeCard % shadowColors.length]}` }}
+                            />
+                        </div>
+
+                        {/* Card description */}
+                        <div className="text-sm leading-relaxed">
+                            {item.description}
+                        </div>
+                    </Motion.div>
+                </AnimatePresence>
+            </div>
+
+            {/* Navigation: dots + arrows */}
+            <div className="flex items-center justify-center gap-6 mt-6">
+                {/* Left arrow */}
+                <button
+                    onClick={goToPrev}
+                    disabled={activeCard === 0}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-300 cursor-pointer
+                        ${activeCard === 0
+                            ? "border-foreground/15 text-foreground/20 cursor-not-allowed"
+                            : "border-sky-500/50 dark:border-slate-400/50 text-sky-500 dark:text-slate-300 hover:bg-sky-500/10 dark:hover:bg-slate-300/10 active:scale-90 shadow-[0_0_12px_rgba(56,189,248,0.3)] dark:shadow-[0_0_12px_rgba(203,213,225,0.3)]"
+                        }`}
+                    aria-label="Previous slide"
+                >
+                    <IconChevronLeft className="h-5 w-5" />
+                </button>
+
+                {/* Dot indicators */}
+                <div className="flex gap-2 items-center">
+                    {content.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => {
+                                setDirection(i > activeCard ? 1 : -1);
+                                setActiveCard(i);
+                            }}
+                            className={`h-2 rounded-full transition-all duration-300 cursor-pointer
+                                ${i === activeCard
+                                    ? "w-6 bg-sky-500 dark:bg-slate-300"
+                                    : "w-2 bg-foreground/30 hover:bg-foreground/60"
+                                }`}
+                            aria-label={`Go to ${content[i].title}`}
+                        />
+                    ))}
+                </div>
+
+                {/* Right arrow */}
+                <button
+                    onClick={goToNext}
+                    disabled={activeCard === content.length - 1}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-300 cursor-pointer
+                        ${activeCard === content.length - 1
+                            ? "border-foreground/15 text-foreground/20 cursor-not-allowed"
+                            : "border-sky-500/50 dark:border-slate-400/50 text-sky-500 dark:text-slate-300 hover:bg-sky-500/10 dark:hover:bg-slate-300/10 active:scale-90 shadow-[0_0_12px_rgba(56,189,248,0.3)] dark:shadow-[0_0_12px_rgba(203,213,225,0.3)]"
+                        }`}
+                    aria-label="Next slide"
+                >
+                    <IconChevronRight className="h-5 w-5" />
+                </button>
+            </div>
+
+            {/* CTA button */}
+            <div className="flex justify-center mt-8">
+                <Motion.a
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-sky-500 px-8 py-3 font-body font-medium text-white shadow-[0_0_20px_rgba(56,189,248,0.6)] transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:bg-slate-200/90 dark:text-slate-900 dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] dark:hover:bg-slate-200 dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.6)]"
+                >
+                    Download Resume
+                </Motion.a>
+            </div>
+        </section>
+    );
+}
 
 // ─── Section ─────────────────────────────────────────────────────────────────
 
 export default function AboutSection({ isDesktop }) {
+    if (!isDesktop) {
+        return <MobileAbout />;
+    }
+
+    // Desktop: existing StickyScroll layout — unchanged
     return (
         <section className="relative h-screen w-full bg-background overflow-hidden">
 
             {/* StickyScroll fills the whole section */}
             <div className="absolute inset-0 z-0 px-4 py-4">
-                <StickyScroll content={content} isDesktop={isDesktop} />
+                <StickyScroll content={stickyScrollContent} isDesktop={isDesktop} />
             </div>
 
             {/* Floating title */}

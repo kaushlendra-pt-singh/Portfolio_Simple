@@ -1,13 +1,12 @@
 import React from 'react'
 import { motion as Motion } from 'framer-motion';
-import ProjectCards from '../reusable/ProjectCards.jsx';
+import { Highlight } from './AboutSection.jsx';
+import GlowProjectCards from '../reusable/glow_ProjectCards.jsx';
 import NLP from '../assets/NLP_Robo.jpg';
 import Agent from '../assets/AI_Agents.jpg';
 import Civic from '../assets/Moile_On_Hand.jpg';
-import { Highlight } from './AboutSection.jsx';
-import GlowProjectCards from '../reusable/glow_ProjectCards.jsx';
 
-function ProjectsSection() {
+function ProjectsSection({ isDesktop }) {
     const content = [
         {
             title: 'NLP Sentiment Analysis',
@@ -57,9 +56,9 @@ function ProjectsSection() {
     ]
 
     return (
-        <section className='flex h-full w-full flex-col bg-background px-4 py-6'>
+        <section className={`flex w-full flex-col bg-background px-4 py-6 ${isDesktop ? 'h-full' : 'min-h-fit'}`}>
 
-            {/* Added dynamic dark mode drop shadow to the title */}
+            {/* Title */}
             <Motion.h1
                 initial={{ opacity: 0.5, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -69,17 +68,31 @@ function ProjectsSection() {
                 MY PROJECTS
             </Motion.h1>
 
+            {/* Cards grid */}
             <div className="flex w-full flex-1 items-center justify-center min-h-0 my-4">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-[95%] px-2 md:px-6 h-full pb-2">
+                <div className={`grid w-full max-w-[95%] px-2 md:px-6 pb-2 gap-6
+                    ${isDesktop ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full' : 'grid-cols-1'}`}
+                >
                     {content.map((elem) => (
                         <div key={elem.id} className="flex justify-center h-full w-full">
-                            <GlowProjectCards image={elem.image} text={elem.text} title={elem.title} repoLink={elem.repoLink} liveLink={elem.liveLink} stats={elem.stats} tagColor={elem.tagColor} tags={elem.tags} />
+                            <GlowProjectCards
+                                image={elem.image}
+                                text={elem.text}
+                                title={elem.title}
+                                repoLink={elem.repoLink}
+                                liveLink={elem.liveLink}
+                                stats={elem.stats}
+                                tagColor={elem.tagColor}
+                                tags={elem.tags}
+                                isDesktop={isDesktop}
+                            />
                         </div>
                     ))}
                 </div>
             </div>
 
-            <div className="shrink-0 flex justify-center mb-5 gap-15">
+            {/* CTA buttons */}
+            <div className="shrink-0 flex justify-center mb-5 gap-6 lg:gap-15">
                 <Motion.a
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +100,6 @@ function ProjectsSection() {
                     href='https://github.com/kaushlendra-pt-singh'
                     target="_blank"
                     rel="noopener noreferrer"
-                    // The Ultimate Silver Button classes:
                     className="rounded-full bg-sky-500 dark:bg-slate-200/90 text-white dark:text-slate-900 px-8 py-3 font-body font-medium shadow-[0_0_20px_rgba(56,189,248,0.6)] dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] transition-all hover:scale-105 hover:bg-sky-400 dark:hover:bg-slate-200 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.6)]"
                 >
                     Visit GitHub
@@ -99,7 +111,6 @@ function ProjectsSection() {
                     href='https://github.com/kaushlendra-pt-singh'
                     target="_blank"
                     rel="noopener noreferrer"
-                    // The Ultimate Silver Button classes:
                     className="rounded-full hidden md:inline bg-sky-500 dark:bg-slate-200/90 text-white dark:text-slate-900 px-8 py-3 font-body font-medium shadow-[0_0_20px_rgba(56,189,248,0.6)] dark:shadow-[0_0_20px_rgba(203,213,225,0.4)] transition-all hover:scale-105 hover:bg-sky-400 dark:hover:bg-slate-200 hover:shadow-[0_0_40px_rgba(56,189,248,0.8)] dark:hover:shadow-[0_0_30px_rgba(203,213,225,0.6)]"
                 >
                     More Projects

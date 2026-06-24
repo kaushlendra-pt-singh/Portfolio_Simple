@@ -21,11 +21,11 @@ export const FloatingNav = ({
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = lastScrollY.current;
 
-        // If we are at the very top (Hero section), hide the floating nav
+        // If we are at the very top (Hero section header is visible), hide the floating nav
         if (latest < 100) {
             setVisible(false);
         } else {
-            // If scrolling UP, show the nav. If scrolling DOWN, hide it.
+            // Past the header — show nav on scroll UP, hide on scroll DOWN
             if (latest < previous) {
                 setVisible(true);
             } else {
@@ -39,7 +39,7 @@ export const FloatingNav = ({
         <AnimatePresence mode="wait">
             <motion.div
                 initial={{
-                    opacity: 0,//may be one
+                    opacity: 0,
                     y: -100,
                 }}
                 animate={{
@@ -51,26 +51,23 @@ export const FloatingNav = ({
                     ease: 'easeInOut'
                 }}
                 className={cn(
-                    "flex max-w-fit fixed top-6 inset-x-0 mx-auto z-5000 items-center justify-center",
+                    "flex max-w-fit fixed top-4 inset-x-0 mx-auto z-[5000] items-center justify-center",
                     className
                 )}>
                 <div
-                    className="flex items-center justify-center gap-2 rounded-full border border-sky-300/80 bg-white/65 px-2 py-1.5 shadow-md shadow-black/10 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-900/60">
-                    {/* Nav items container */}
-                    <div className="flex items-center gap-1">
-                        {navItems.map((navItem, idx) => (
-                            <a
-                                key={`link-${idx}`}
-                                href={navItem.link}
-                                className={cn(
-                                    "relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-sky-500/80 hover:text-foreground dark:hover:bg-slate-800"
-                                )}>
-                                <span className="block sm:hidden">{navItem.icon}</span>
-                                <span className="hidden sm:block">{navItem.name}</span>
-                            </a>
-                        ))}
-                    </div>
-
+                    className="flex items-center justify-center gap-1 rounded-full border border-sky-300/50 bg-white/50 px-2 py-1.5 shadow-lg shadow-sky-500/10 backdrop-blur-xl dark:border-slate-600/40 dark:bg-slate-900/40 dark:shadow-slate-400/10"
+                >
+                    {navItems.map((navItem, idx) => (
+                        <a
+                            key={`link-${idx}`}
+                            href={navItem.link}
+                            className={cn(
+                                "relative flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-foreground/70 transition-all duration-200 hover:bg-sky-100/70 hover:text-sky-600 active:scale-95 dark:hover:bg-slate-700/50 dark:hover:text-slate-200"
+                            )}>
+                            <span>{navItem.icon}</span>
+                            <span className="hidden sm:block text-xs">{navItem.name}</span>
+                        </a>
+                    ))}
                 </div>
             </motion.div>
         </AnimatePresence>
