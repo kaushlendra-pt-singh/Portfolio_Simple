@@ -97,41 +97,10 @@ const content = [
                 <p className="text-base lg:text-lg leading-relaxed text-aboutForeground mt-3">
                     I architect secure, scalable backend infrastructure and robust AI/ML pipelines, delivering them through clean, high-performance user interfaces.
                 </p>
-                <TagRow tags={["Full Stack", "AI / ML", "System Design", "DBMS"]} color="yellow" />
+                <TagRow tags={["Full Stack Systems", "AI/ML Pipelines"]} color="yellow" />
             </div>
         ),
         image: LapMan,
-    },
-    {
-        title: 'Present',
-        description: (
-            <div>
-                <p className="text-base lg:text-lg leading-relaxed text-aboutForeground">
-                    Bridging complex backend architecture with pixel-perfect frontends, while continuously advancing my expertise in core computer science fundamentals.
-                </p>
-                <BulletList items={[
-                    <>Crafting dynamic UIs with <Highlight color="sky">React</Highlight> & <Highlight color="sky">Next.js</Highlight></>,
-                    <>Engineering scalable backends in <Highlight color="green">Python</Highlight> & <Highlight color="green">Node.js</Highlight></>,
-                    <>Integrating{" "}
-                        <Tip tip="Large Language Models — GPT, Claude, Gemini and more" align="left">
-                            LLMs
-                        </Tip>
-                        {" "}into intelligent products using <Highlight color="sky">LangGraph</Highlight>
-                    </>,
-                    <>Driving impact as an active{" "}
-                        <Tip tip="Contributing to open repos, filing PRs, reviewing issues" align="left">
-                            open-source contributor
-                        </Tip>
-                    </>,
-                    <>Mastering advanced{" "}
-                        <Tip tip="Data Structures and Algorithms" align="left">
-                            DSA
-                        </Tip>{" "}and problem-solving with <Highlight color="green">Java</Highlight>
-                    </>,
-                ]} />
-            </div>
-        ),
-        image: MachinArch,
     },
     {
         title: 'My Way',
@@ -153,6 +122,32 @@ const content = [
             </div>
         ),
         image: CodingLap,
+    },
+    {
+        title: 'Present',
+        description: (
+            <div>
+                <p className="text-base lg:text-lg leading-relaxed text-aboutForeground">
+                    Writing scalable backends and AI/ML piplines. Also advancing in computer science fundamentals.
+                </p>
+                <BulletList items={[
+                    <>Crafting <Highlight color="sky">dynamic UIs.</Highlight></>,
+                    <>Engineering <Highlight color="green">scalable backends.</Highlight></>,
+                    <>Integrating{" "}
+                        <Tip tip="Large Language Models — GPT, Claude, Gemini and more" align="left">
+                            LLMs
+                        </Tip>
+                        {" "}into intelligent products.
+                    </>,
+                    <>Driving impact as an active{" "}
+                        <Tip tip="Contributing to open repos, filing PRs, reviewing issues" align="left">
+                            open-source contributor
+                        </Tip>
+                    </>
+                ]} />
+            </div>
+        ),
+        image: MachinArch,
     },
     {
         title: 'Beyond the Code',

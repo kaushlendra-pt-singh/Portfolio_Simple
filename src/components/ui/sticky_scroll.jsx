@@ -154,8 +154,8 @@ export const StickyScroll = ({ content, contentClassName, isDesktop: isDesktopPr
 
   const shadowColors = [
     "rgba(250, 204, 21, 0.7)",
-    "rgba(56, 189, 248, 0.7)",
     "rgba(127, 0, 255, 0.7)",
+    "rgba(56, 189, 248, 0.7)",
     "rgba(74, 222, 128, 0.7)",
   ];
 
