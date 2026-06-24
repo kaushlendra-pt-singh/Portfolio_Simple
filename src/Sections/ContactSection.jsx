@@ -95,7 +95,7 @@ export default function ContactSection({ isDesktop }) {
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2, duration: 0.6 }}
-                        className="flex flex-col justify-center space-y-3"
+                        className="flex flex-col justify-center items-center lg:items-start space-y-3"
                     >
                         <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground leading-tight">
                             Let's build <br />
@@ -141,7 +141,7 @@ export default function ContactSection({ isDesktop }) {
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3, duration: 0.6 }}
-                        className="flex mb-10 w-full items-center lg:justify-end relative"
+                        className="flex mb-10 w-full justify-center lg:justify-end relative"
                     >
                         {/* Glow effect: disabled on mobile */}
                         <GlowingEffect disabled={!isDesktop} spread={30} glow={true} borderWidth={1.5} proximity={20} className={'rounded-2xl'} inactivezone={0.1} />
