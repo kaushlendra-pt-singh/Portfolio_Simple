@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 // Must match the SECTION_IDS order and IDs in App.jsx.
-const SECTION_IDS = ['home', 'about', 'projects', 'contact'];
+const SECTION_IDS = ['home', 'about', 'skills', 'projects', 'contact'];
 const DESKTOP_MQ = '(min-width: 1024px)';
 
 export const StickyScroll = ({ content, contentClassName, isDesktop: isDesktopProp }) => {
@@ -112,7 +112,7 @@ export const StickyScroll = ({ content, contentClassName, isDesktop: isDesktopPr
     const canExit = Date.now() - lastExitTime.current > EXIT_COOLDOWN;
 
     if (nextCard >= cardLength && canExit) {
-      exitToSection("projects");
+      exitToSection("skills");
     } else if (nextCard < 0 && canExit) {
       exitToSection("home");
     } else if (nextCard >= 0 && nextCard < cardLength) {
@@ -147,7 +147,7 @@ export const StickyScroll = ({ content, contentClassName, isDesktop: isDesktopPr
     const currentCard = Math.round(progressMV.get());
     const nextCard = currentCard + direction;
     const canExit = Date.now() - lastExitTime.current > EXIT_COOLDOWN;
-    if (nextCard >= cardLength && canExit) exitToSection("projects");
+    if (nextCard >= cardLength && canExit) exitToSection("skills");
     else if (nextCard < 0 && canExit) exitToSection("home");
     else if (nextCard >= 0 && nextCard < cardLength) goToCard(nextCard);
   };

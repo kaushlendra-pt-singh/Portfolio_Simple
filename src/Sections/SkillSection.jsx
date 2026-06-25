@@ -313,7 +313,7 @@ export default function SkillSection({ isDesktop }) {
                     className="text-center mb-4" // Reduced from mb-6
                 >
                     <h2 className="bg-linear-to-t from-slate-800 to-slate-500 dark:from-slate-50 dark:to-slate-500 bg-clip-text text-2xl font-bold font-heading tracking-tight text-transparent drop-shadow-[0_0_30px_rgba(56,189,248,0.5)] dark:drop-shadow-[0_0_30px_rgba(150,150,150,0.5)] md:text-4xl uppercase">
-                        Technical Arsenal
+                        My Skills
                     </h2>
                     {/* FIXED: Removed hover instruction text & tuned light mode text color */}
                     <p className="mt-2 text-slate-600 dark:text-zinc-400 max-w-2xl mx-auto text-center text-xs md:text-sm leading-relaxed">
