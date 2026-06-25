@@ -3,6 +3,7 @@ import BackToTop from './reusable/BackToTop.jsx';
 import Header from './reusable/Header.jsx';
 import HeroSection from './Sections/HeroSection.jsx';
 import AboutSection from './Sections/AboutSection.jsx';
+import SkillSection from './Sections/SkillSection.jsx';
 import ProjectsSection from './Sections/ProjectsSection.jsx';
 import ContactSection from './Sections/ContactSection.jsx';
 import { FloatingNav } from './components/ui/floating-navbar.jsx';
@@ -11,7 +12,7 @@ import { IconHome, IconUser, IconBriefcase, IconMessage } from '@tabler/icons-re
 import { useRef, useEffect, useState } from 'react';
 
 // Ordered list of section IDs — must match the JSX order below.
-const SECTION_IDS = ['home', 'about', 'projects', 'contact'];
+const SECTION_IDS = ['home', 'about', 'skills', 'projects', 'contact'];
 const DESKTOP_MQ = '(min-width: 1024px)';
 
 // ── Custom scroll animation ─────────────────────────────────────────────────
@@ -59,10 +60,11 @@ function App() {
   const navItems = [
     { name: "Home", link: "#home", icon: <IconHome className="h-4 w-4" /> },
     { name: "About", link: "#about", icon: <IconUser className="h-4 w-4" /> },
+    { name: "Skills", link: "#skills", icon: <IconBriefcase className="h-4 w-4" /> },
     { name: "Projects", link: "#projects", icon: <IconBriefcase className="h-4 w-4" /> },
     { name: "Contact", link: "#contact", icon: <IconMessage className="h-4 w-4" /> },
   ];
-  const links = { home: '#home', about: '#about', projects: '#projects', contact: '#contact' };
+  const links = { home: '#home', about: '#about', skills: '#skills', projects: '#projects', contact: '#contact' };
 
   // ── Track desktop vs mobile ──────────────────────────────────────────────
   useEffect(() => {
@@ -178,6 +180,13 @@ function App() {
           className={`${isDesktop ? 'snap-start h-screen' : ''}`}
         >
           <AboutSection isDesktop={isDesktop} />
+        </section>
+
+        <section
+          id='skills'
+          className={`${isDesktop ? 'snap-start h-screen' : ''}`}
+        >
+          <SkillSection isDesktop={isDesktop} />
         </section>
 
         <section
