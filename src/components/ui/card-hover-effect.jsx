@@ -2,13 +2,18 @@ import { cn } from "@/lib/utils";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const HoverEffect = ({
     items,
     className
 }) => {
     let [hoveredIndex, setHoveredIndex] = useState(null);
+    let prevHoveredIndex = useRef(null);
+
+    useEffect(() => {
+        prevHoveredIndex.current = hoveredIndex;
+    }, [hoveredIndex]);
 
     return (
         <div
@@ -28,7 +33,7 @@ export const HoverEffect = ({
                                 <motion.span
                                     className="absolute inset-0 h-full w-full bg-sky-200 dark:bg-white/10 hidden lg:block rounded-3xl z-0 shadow-[0_0_25px_rgba(56,189,248,0.4)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                                     layoutId="hoverBackground"
-                                    initial={{ opacity: 0 }}
+                                    initial={{ opacity: prevHoveredIndex.current !== null ? 1 : 0 }}
                                     animate={{
                                         opacity: 1,
                                         transition: { duration: 0.15 },
