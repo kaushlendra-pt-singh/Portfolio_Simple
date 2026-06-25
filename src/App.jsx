@@ -60,8 +60,8 @@ function App() {
   const navItems = [
     { name: "Home", link: "#home", icon: <IconHome className="h-4 w-4" /> },
     { name: "About", link: "#about", icon: <IconUser className="h-4 w-4" /> },
-    { name: "Skills", link: "#skills", icon: <IconBriefcase className="h-4 w-4" /> },
-    { name: "Projects", link: "#projects", icon: <IconCode className="h-4 w-4" /> },
+    { name: "Skills", link: "#skills", icon: <IconCode className="h-4 w-4" /> },
+    { name: "Projects", link: "#projects", icon: <IconBriefcase className="h-4 w-4" /> },
     { name: "Contact", link: "#contact", icon: <IconMessage className="h-4 w-4" /> },
   ];
   const links = { home: '#home', about: '#about', skills: '#skills', projects: '#projects', contact: '#contact' };
