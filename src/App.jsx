@@ -8,7 +8,7 @@ import ProjectsSection from './Sections/ProjectsSection.jsx';
 import ContactSection from './Sections/ContactSection.jsx';
 import { FloatingNav } from './components/ui/floating-navbar.jsx';
 import './App.css';
-import { IconHome, IconUser, IconBriefcase, IconMessage } from '@tabler/icons-react';
+import { IconHome, IconUser, IconBriefcase, IconMessage, IconCode } from '@tabler/icons-react';
 import { useRef, useEffect, useState } from 'react';
 
 // Ordered list of section IDs — must match the JSX order below.
@@ -61,7 +61,7 @@ function App() {
     { name: "Home", link: "#home", icon: <IconHome className="h-4 w-4" /> },
     { name: "About", link: "#about", icon: <IconUser className="h-4 w-4" /> },
     { name: "Skills", link: "#skills", icon: <IconBriefcase className="h-4 w-4" /> },
-    { name: "Projects", link: "#projects", icon: <IconBriefcase className="h-4 w-4" /> },
+    { name: "Projects", link: "#projects", icon: <IconCode className="h-4 w-4" /> },
     { name: "Contact", link: "#contact", icon: <IconMessage className="h-4 w-4" /> },
   ];
   const links = { home: '#home', about: '#about', skills: '#skills', projects: '#projects', contact: '#contact' };
