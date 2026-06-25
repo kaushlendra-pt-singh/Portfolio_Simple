@@ -251,7 +251,7 @@ function MobileAbout() {
             </Motion.h1>
 
             {/* Carousel container */}
-            <div className="relative w-full" style={{ perspective: '1200px' }}>
+            <div className="relative w-full min-h-550px flex items-start justify-center" style={{ perspective: '1200px' }}>
                 <AnimatePresence mode="wait" custom={direction}>
                     <Motion.div
                         key={activeCard}
@@ -276,12 +276,17 @@ function MobileAbout() {
 
                         {/* Card image */}
                         <div className="w-full flex justify-center mb-5">
-                            <img
-                                src={item.image}
-                                alt={item.title}
-                                className="w-full max-w-xs rounded-xl object-cover"
+                            <div 
+                                className="w-full max-w-xs aspect-4/3 rounded-xl overflow-hidden bg-foreground/5"
                                 style={{ boxShadow: `0 8px 32px ${shadowColors[activeCard % shadowColors.length]}` }}
-                            />
+                            >
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    className="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
                         </div>
 
                         {/* Card description */}

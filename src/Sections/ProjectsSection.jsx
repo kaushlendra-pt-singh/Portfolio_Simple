@@ -20,7 +20,7 @@ function ProjectsSection({ isDesktop }) {
             ],
             tagColor: "sky",
             repoLink: "https://github.com/kaushlendra-pt-singh/NLP_Sentiment_Analysis",
-            liveLink: "https://nlp-sentiment-analysis.netlify.app/",
+            liveLink: "https://nlp-sentiment-analysis-tmkx.vercel.app/",
             id: 1
         },
         {
