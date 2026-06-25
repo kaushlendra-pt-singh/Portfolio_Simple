@@ -12,7 +12,8 @@ export const HoverEffect = ({
 
     return (
         <div
-            className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-4 gap-2", className)}>
+            className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-4 gap-2", className)}
+            onMouseLeave={() => setHoveredIndex(null)}>
             {items.map((item, idx) => {
                 const isLink = !!item.link;
                 const Component = isLink ? "a" : "div";
@@ -21,12 +22,11 @@ export const HoverEffect = ({
                         href={item?.link}
                         key={item?.link || idx}
                         className="relative group block p-1.5 h-full w-full"
-                        onMouseEnter={() => setHoveredIndex(idx)}
-                        onMouseLeave={() => setHoveredIndex(null)}>
+                        onMouseEnter={() => setHoveredIndex(idx)}>
                         <AnimatePresence>
                             {hoveredIndex === idx && (
                                 <motion.span
-                                    className="absolute inset-0 h-full w-full bg-slate-100 dark:bg-slate-800/80 hidden lg:block rounded-3xl z-0"
+                                    className="absolute inset-0 h-full w-full bg-sky-200 dark:bg-white/10 hidden lg:block rounded-3xl z-0 shadow-[0_0_25px_rgba(56,189,248,0.4)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                                     layoutId="hoverBackground"
                                     initial={{ opacity: 0 }}
                                     animate={{
@@ -61,7 +61,7 @@ export const Card = ({
     return (
         <div
             className={cn(
-                "rounded-2xl h-full w-full p-3 overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 group-hover:border-sky-500/50 dark:group-hover:border-sky-400/50 shadow-sm dark:shadow-none relative z-20 transition-colors duration-300",
+                "rounded-2xl h-full w-full p-3 overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none relative z-20 transition-colors duration-300",
                 className
             )}>
             <div className="relative z-50">
