@@ -304,7 +304,7 @@ export default function SkillSection({ isDesktop }) {
     return (
         // FIXED MOBILE: Replaced 'h-screen overflow-hidden' with 'min-h-screen py-12'. 
         // This acts exactly like h-screen on desktop, but allows safe scrolling on mobile!
-        <section className="w-full min-h-screen bg-background py-12 px-4 md:px-10 flex flex-col justify-center">
+        <section className="w-full min-h-screen bg-background py-6 px-4 md:px-10 flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
                 <motion.div
                     initial={{ opacity: 0.5, y: 30 }}

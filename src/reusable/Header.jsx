@@ -32,19 +32,23 @@ function Header({ links }) {
                 <ul className='flex flex-8 sm:flex-none sm:w-full items-center justify-between sm:justify-center sm:gap-8 text-slate-800 dark:text-slate-200 sm:text-base md:text-lg text-[15px] font-medium'>
 
                     <li className='ease-in-out transition-all duration-400 list-none hover:bg-sky-200 dark:hover:bg-slate-800 rounded-xl sm:rounded-2xl overflow-hidden'>
-                        <a href={links.home} onClick={handleNavClick} className='block w-full h-full px-2 py-1.5 sm:p-2'>Home</a>
+                        <a href={links.home} onClick={handleNavClick} className='block w-full h-full px-1 py-1.5 sm:p-2'>Home</a>
                     </li>
 
                     <li className='ease-in-out transition-all duration-400 list-none hover:bg-sky-200 dark:hover:bg-slate-800 rounded-xl sm:rounded-2xl overflow-hidden'>
-                        <a href={links.about} onClick={handleNavClick} className='block w-full h-full px-2 py-1.5 sm:p-2'>About</a>
+                        <a href={links.about} onClick={handleNavClick} className='block w-full h-full px-1 py-1.5 sm:p-2'>About</a>
                     </li>
 
                     <li className='ease-in-out transition-all duration-400 list-none hover:bg-sky-200 dark:hover:bg-slate-800 rounded-xl sm:rounded-2xl overflow-hidden'>
-                        <a href={links.projects} onClick={handleNavClick} className='block w-full h-full px-2 py-1.5 sm:p-2'>Projects</a>
+                        <a href={links.skills} onClick={handleNavClick} className='block w-full h-full px-1 py-1.5 sm:p-2'>Skills</a>
                     </li>
 
                     <li className='ease-in-out transition-all duration-400 list-none hover:bg-sky-200 dark:hover:bg-slate-800 rounded-xl sm:rounded-2xl overflow-hidden'>
-                        <a href={links.contact} onClick={handleNavClick} className='block w-full h-full px-2 py-1.5 sm:p-2'>Contact</a>
+                        <a href={links.projects} onClick={handleNavClick} className='block w-full h-full px-1 py-1.5 sm:p-2'>Projects</a>
+                    </li>
+
+                    <li className='ease-in-out transition-all duration-400 list-none hover:bg-sky-200 dark:hover:bg-slate-800 rounded-xl sm:rounded-2xl overflow-hidden'>
+                        <a href={links.contact} onClick={handleNavClick} className='block w-full h-full px-1 py-1.5 sm:p-2'>Contact</a>
                     </li>
 
                 </ul>
