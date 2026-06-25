@@ -95,7 +95,6 @@ function Header({ links }) {
         open: {
             opacity: 1,
             height: "auto",
-            display: "flex",
             transition: {
                 height: { duration: 0.4, ease: "easeOut" },
                 staggerChildren: 0.08,
@@ -105,9 +104,6 @@ function Header({ links }) {
         closed: {
             opacity: 0,
             height: 0,
-            transitionEnd: {
-                display: "none"
-            },
             transition: {
                 height: { duration: 0.3, ease: "easeIn" },
                 staggerChildren: 0.05,
@@ -170,19 +166,21 @@ function Header({ links }) {
                         initial="closed"
                         animate="open"
                         exit="closed"
-                        className="overflow-hidden w-full flex flex-col gap-2 pb-4 pt-2 border-t border-slate-300/50 dark:border-slate-700/50 sm:hidden px-4"
+                        className="overflow-hidden w-full sm:hidden"
                     >
-                        {navItems.map((item) => (
-                            <motion.div key={item.name} variants={linkVariants}>
-                                <a
-                                    href={item.href}
-                                    onClick={handleNavClick}
-                                    className="text-base font-semibold text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 px-4 py-2.5 rounded-xl hover:bg-sky-200/60 dark:hover:bg-slate-800/80 transition-all duration-200 block text-center"
-                                >
-                                    {item.name}
-                                </a>
-                            </motion.div>
-                        ))}
+                        <div className="flex flex-col gap-2 pb-4 pt-2 border-t border-slate-300/50 dark:border-slate-700/50 px-4">
+                            {navItems.map((item) => (
+                                <motion.div key={item.name} variants={linkVariants}>
+                                    <a
+                                        href={item.href}
+                                        onClick={handleNavClick}
+                                        className="text-base font-semibold text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 px-4 py-2.5 rounded-xl hover:bg-sky-200/60 dark:hover:bg-slate-800/80 transition-all duration-200 block text-center"
+                                    >
+                                        {item.name}
+                                    </a>
+                                </motion.div>
+                            ))}
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
